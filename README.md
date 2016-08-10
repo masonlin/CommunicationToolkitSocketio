@@ -2,24 +2,22 @@
 Use Node/Socket.io/React/Flux to implement a suit communication tool.　　
 
 =============
-1.網頁傳訊息 - Messanger　　
+1.realtime send message - Messanger　　
 
-2.網頁傳圖片　　
+2.share picture on
 
-3.網頁傳檔案　　
+3.share file　　
 
-4.網頁傳串流　　
+4.vedio and audio stream (webRTC)　　
 
-5.網頁BOT　　
+5.meassanger bot　　
 
-6.網頁密文討論　　
+6.data encryption and decryption　　
 
-7.網頁畫圖　　
+7.draw on browser　　
 
-8.webRTC　　
+8.data onto DB　　
 
-9.存資料庫　　
-
-10.整合包　　
+9.Integration all　　
 
 
