@@ -1,0 +1,17 @@
+{
+  "name": "mason_profile",
+  "version": "1.0.0",
+  "main": "mason_profile.js",
+  "dependencies": {
+    "express": "4.13.x",
+    "socket.io": "^1.4.8",
+    "path": "^0.12.7",
+    "ejs": "^2.4.2",
+    "body-parser": "^1.15.2",
+    "pg": "^6.0.2"
+  },
+  "engines": {
+    "node": "^4.2.3",
+    "npm": "3.5.1"
+  }
+}
