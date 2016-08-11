@@ -48,6 +48,7 @@
 	var ReactDOM = __webpack_require__(148);
 	var SocketActionCreators =  __webpack_require__(149);
 	var Socket = __webpack_require__(154);
+	var MsgContext = __webpack_require__(209);
 
 
 	var App = React.createClass({displayName: "App",
@@ -66,6 +67,25 @@
 
 	// ReactDOM.render(<App />, document.getElementById('app'));
 	React.render(React.createElement(App, null), document.getElementById('app'));
+
+
+
+
+	var TypeMsg = React.createClass({displayName: "TypeMsg",
+	  // componentDidMount(){
+	  //
+	  // },
+
+	  render: function() {
+	    return (
+	     React.createElement("span", null, 
+	        React.createElement(MsgContext, null)
+	     )
+	    );
+	  }
+	});
+
+	React.render(React.createElement(TypeMsg, null), document.getElementById('type_msg'));
 
 
 /***/ },
@@ -19013,6 +19033,16 @@
 	    };
 
 	    AppSocketDispatcher.dispatch(action);
+	  },
+
+	  sendMsg: function(type_msg){
+	    console.log('SEND_MSG');
+	    var action = {
+	      actionType: "SEND_MSG",
+	      msg: type_msg
+	    };
+
+	    AppSocketDispatcher.dispatch(action);
 	  }
 	};
 
@@ -19345,7 +19375,7 @@
 	var oMasonConf = new clsMasonConf();
 
 	var Sockets = React.createClass({displayName: "Sockets",
-	  _socketData: '',
+	  _socketData: [],
 	  socket: null,
 
 	  getSocketData: function(){
@@ -19357,17 +19387,19 @@
 	      this.socket = socketio.connect('http://mason-restful.herokuapp.com');
 	    }
 
-	    //
-	    var fuck='Hi, nice to meet you.';
-	    console.log('send' + fuck);
-	    this.socket.emit('s_msg', JSON.stringify({ user: 'me', msg: fuck }))
-	    console.log('send OK');
+	    //var helo = 'Hi, nice to see you again.';
+	    var helo = 'Hi, nice to meet you.';
+	    // console.log('send' + fuck);
+	    this.socket.emit('s_msg', JSON.stringify({ user: 'Bot', msg: helo }))
+	    // console.log('send OK');
 	    //
 
 	    this.socket.on('c_msg', function(data){
-	      console.log('get msg:' + data);
-	      this._socketData = data;
-	      //this.setState(data);
+	      // console.log('get msg:' + data);
+	      // this._socketData = data;
+	      this._socketData.push(data);
+	      // this.setState(data);
+	      console.log(this._socketData);
 	      this.setState(JSON.parse(data));
 	    }.bind(this));
 	  },
@@ -19376,11 +19408,15 @@
 	  },
 
 
-	  sendSocketData: function(){
-	    this.socket.emit('s_msg', { user: 'me', msg: 'TESTTESTTESTTTTT!' })    //要改成TEXTBOX裡的訊息
+	  sendSocketData: function(input_msg){
+	    // var in_msg = input_msg || 'TESTTESTTESTTTTT!';
+	    var in_msg = input_msg;
+	    // console.log(in_msg);
+	    this.socket.emit('s_msg', JSON.stringify({ user: 'me', msg: in_msg  }));    //要改成TEXTBOX裡的訊息,及USER
 	  },
-	  onSend: function(){
-	    this.sendSocketData();
+	  onSend: function(input_msg){
+	    // console.log('onSend:' + input_msg);
+	    this.sendSocketData(input_msg);
 	  },
 
 
@@ -19401,12 +19437,34 @@
 	  },
 
 	  render: function() {
-	    console.log('render');
+	    var msgs = this._socketData.map(function(content, index) {
+	      console.log(content + ' ' + index);
+	      var user = JSON.parse(content).user;
+	      var msg = JSON.parse(content).msg;
+
+	      // return (
+	      //   <div key={index}>
+	      //     {user} ': ' {msg}
+	      //   </div>
+	      // );
+	      return (
+	          user + ': ' + msg + '\n'
+	      );
+
+	    });
+
+	    var cleanMsgs='';
+	    for(i=0;i<msgs.length;i++){
+	      cleanMsgs += msgs[i];
+	    };
+
+	    console.log(msgs);
 	    // var user = (this._socketData ? JSON.parse(this._socketData).user : "");
-	    var msg = (this._socketData ? JSON.parse(this._socketData).msg : "");
+	    // var msg = (this._socketData ? JSON.parse(this._socketData).msg : "");
 	    return (
 	      React.createElement("span", null, 
-	        "'hi: ' ", msg
+	        React.createElement("textarea", {rows: "50", cols: "80", value: cleanMsgs}
+	        )
 	      )
 	    );
 	  }
@@ -27052,12 +27110,14 @@
 	    this.removeListener('change', callback);
 	  },
 
+	  _msg: '',
 
-	  emitSend: function() {
-	    this.emit('send');
+	  emitSend: function(msg) {
+	    this._msg = msg;
+	    this.emit('send', this._msg);    //callback 的參數放在 eventname 之後
 	  },
 	  addSendListener: function(callback){
-	    this.on('send', callback);
+	    this.on('send', callback, this._msg);  //callback 的參數放在 callback fn 之後
 	  },
 	  removeSendListener: function(callback) {
 	    this.removeListener('send', callback);
@@ -27075,13 +27135,14 @@
 	  switch(action.actionType) {
 
 	    case "CREATE_SOCKET":
-	      console.log('CREATE_SOCKET');
+	      // console.log('CREATE_SOCKET');
 	      Stores.emitChange();
 	      break;
 
-	    // case "CREATE_SOCKET_PG":
-	    //   Stores.emitChange();
-	    //   break;
+	    case "SEND_MSG":
+	      // console.log('SEND_MSG...');
+	      Stores.emitSend(action.msg);
+	      break;
 
 	    default:
 	  }
@@ -27458,6 +27519,62 @@
 
 
 	module.exports = MasonConf;
+
+
+/***/ },
+/* 209 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	// var ReactDOM = require('react-dom');
+	var socketio = __webpack_require__(155);
+	var SocketStore = __webpack_require__(205);
+	var clsMasonConf = __webpack_require__(208);
+	var oMasonConf = new clsMasonConf();
+	var SocketActionCreators =  __webpack_require__(149);
+
+	var Msg_context = React.createClass({displayName: "Msg_context",
+	  handleClick: function(e){
+	    var msgNode = this.refs.input_text.getDOMNode();
+	    // console.log(msg);
+	    // this.setState({input_msg: msg})
+	    // return "OK";
+	    SocketActionCreators.sendMsg(msgNode.value);
+	    msgNode.value='';  //clean input box
+	    msgNode.focus();
+	  },
+
+	  getInitialState: function(){
+	    return {input_msg: ''};
+	  },
+
+
+	  render: function(){
+	    return (
+	      React.createElement("span", null, 
+	        React.createElement("input", {ref: "input_text", 
+	               type: "text", 
+	               name: "msg_context", 
+	               style: divStyle, 
+	               onKeyDown: (e) => {
+	                 if (e.keyCode == 13) {
+	                     console.log(e.keyCode);
+	                     this.handleClick();
+	                     console.log(e.keyCode);
+	                 }
+	               }}
+	        ), 
+	        React.createElement("input", {type: "button", value: "SEND", onClick: this.handleClick})
+	      )
+	    );
+	  }
+	});
+
+	var divStyle = {
+	  width: '500px'
+	};
+
+	module.exports = Msg_context;
 
 
 /***/ }

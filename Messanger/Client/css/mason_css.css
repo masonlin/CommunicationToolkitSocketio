@@ -1,3 +1,10 @@
+td.hismsg {
+  height:500px;
+  width:500px;
+  vertical-align: bottom;
+}
+
+
 span.faa {
   /*動畫*/
   animation-duration: 1s;

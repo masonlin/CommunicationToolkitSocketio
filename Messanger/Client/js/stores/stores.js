@@ -14,12 +14,14 @@ var Stores = assign({}, EventEmitter.prototype, {
     this.removeListener('change', callback);
   },
 
+  _msg: '',
 
-  emitSend: function() {
-    this.emit('send');
+  emitSend: function(msg) {
+    this._msg = msg;
+    this.emit('send', this._msg);    //callback 的參數放在 eventname 之後
   },
   addSendListener: function(callback){
-    this.on('send', callback);
+    this.on('send', callback, this._msg);  //callback 的參數放在 callback fn 之後
   },
   removeSendListener: function(callback) {
     this.removeListener('send', callback);
@@ -37,13 +39,14 @@ AppDispatcher.register(function(action) {
   switch(action.actionType) {
 
     case "CREATE_SOCKET":
-      console.log('CREATE_SOCKET');
+      // console.log('CREATE_SOCKET');
       Stores.emitChange();
       break;
 
-    // case "CREATE_SOCKET_PG":
-    //   Stores.emitChange();
-    //   break;
+    case "SEND_MSG":
+      // console.log('SEND_MSG...');
+      Stores.emitSend(action.msg);
+      break;
 
     default:
   }

@@ -5,7 +5,7 @@ var clsMasonConf = require('../masonconf');
 var oMasonConf = new clsMasonConf();
 
 var Sockets = React.createClass({
-  _socketData: '',
+  _socketData: [],
   socket: null,
 
   getSocketData: function(){
@@ -17,17 +17,19 @@ var Sockets = React.createClass({
       this.socket = socketio.connect('http://mason-restful.herokuapp.com');
     }
 
-    //
-    var fuck='Hi, nice to meet you.';
-    console.log('send' + fuck);
-    this.socket.emit('s_msg', JSON.stringify({ user: 'me', msg: fuck }))
-    console.log('send OK');
+    //var helo = 'Hi, nice to see you again.';
+    var helo = 'Hi, nice to meet you.';
+    // console.log('send' + fuck);
+    this.socket.emit('s_msg', JSON.stringify({ user: 'Bot', msg: helo }))
+    // console.log('send OK');
     //
 
     this.socket.on('c_msg', function(data){
-      console.log('get msg:' + data);
-      this._socketData = data;
-      //this.setState(data);
+      // console.log('get msg:' + data);
+      // this._socketData = data;
+      this._socketData.push(data);
+      // this.setState(data);
+      console.log(this._socketData);
       this.setState(JSON.parse(data));
     }.bind(this));
   },
@@ -36,11 +38,15 @@ var Sockets = React.createClass({
   },
 
 
-  sendSocketData: function(){
-    this.socket.emit('s_msg', { user: 'me', msg: 'TESTTESTTESTTTTT!' })    //要改成TEXTBOX裡的訊息
+  sendSocketData: function(input_msg){
+    // var in_msg = input_msg || 'TESTTESTTESTTTTT!';
+    var in_msg = input_msg;
+    // console.log(in_msg);
+    this.socket.emit('s_msg', JSON.stringify({ user: 'me', msg: in_msg  }));    //要改成TEXTBOX裡的訊息,及USER
   },
-  onSend: function(){
-    this.sendSocketData();
+  onSend: function(input_msg){
+    // console.log('onSend:' + input_msg);
+    this.sendSocketData(input_msg);
   },
 
 
@@ -61,12 +67,34 @@ var Sockets = React.createClass({
   },
 
   render: function() {
-    console.log('render');
+    var msgs = this._socketData.map(function(content, index) {
+      console.log(content + ' ' + index);
+      var user = JSON.parse(content).user;
+      var msg = JSON.parse(content).msg;
+
+      // return (
+      //   <div key={index}>
+      //     {user} ': ' {msg}
+      //   </div>
+      // );
+      return (
+          user + ': ' + msg + '\n'
+      );
+
+    });
+
+    var cleanMsgs='';
+    for(i=0;i<msgs.length;i++){
+      cleanMsgs += msgs[i];
+    };
+
+    console.log(msgs);
     // var user = (this._socketData ? JSON.parse(this._socketData).user : "");
-    var msg = (this._socketData ? JSON.parse(this._socketData).msg : "");
+    // var msg = (this._socketData ? JSON.parse(this._socketData).msg : "");
     return (
       <span>
-        'hi: ' {msg}
+        <textarea rows="50" cols="80" value={cleanMsgs} >
+        </textarea>
       </span>
     );
   }
