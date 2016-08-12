@@ -4,7 +4,7 @@ Use Node/Socket.io/React/Flux to implement a suit communication tool.　　
 =============
 1. realtime send message - Messanger (80%)　　
 
-2. React Native - Messanger (80%)
+2. React Native - Messanger (0%)
 
 2. share picture on (0%)  
 
