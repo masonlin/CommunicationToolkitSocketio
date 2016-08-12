@@ -1,5 +1,5 @@
 # CommunicationToolkitSocketio
-Use Node/Socket.io/React/Flux to implement a suit communication tool.　　
+Use Node/Socket.io/React/Flux/BootStrap to implement a suit communication tool.　　
 
 =============
 1. realtime send message - Messanger (80%)　　
