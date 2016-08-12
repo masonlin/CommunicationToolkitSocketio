@@ -2,7 +2,7 @@
 Use Node/Socket.io/React/Flux/BootStrap to implement a suit communication tool.　　
 
 =============
-1. realtime send message - Messanger (80%)　　
+1. realtime send message - Messanger (90%)　　
 
 2. React Native - Messanger (0%)
 
