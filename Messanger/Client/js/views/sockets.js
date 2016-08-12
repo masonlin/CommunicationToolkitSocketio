@@ -11,7 +11,7 @@ var Sockets = React.createClass({
   getSocketData: function(){
     if(oMasonConf.isDev == true){
       console.log('develop version');
-      this.socket = socketio.connect('http://192.168.1.101:8080/');   //change to parameters (IP:PORT)
+      this.socket = socketio.connect('http://192.168.1.105:8080/');   //change to parameters (IP:PORT)
     }else{
       console.log('rlease version');
       this.socket = socketio.connect('http://mason-restful.herokuapp.com');
@@ -49,6 +49,10 @@ var Sockets = React.createClass({
     this.sendSocketData(input_msg);
   },
 
+
+  emptyFn: function(){
+
+  },
 
   getInitialState: function(){
     return {
@@ -88,14 +92,23 @@ var Sockets = React.createClass({
       cleanMsgs += msgs[i];
     };
 
+    if(this.refs.ta){
+      var taNode = this.refs.ta.getDOMNode();
+      taNode.scrollTop = taNode.scrollHeight;
+    }
     console.log(msgs);
     // var user = (this._socketData ? JSON.parse(this._socketData).user : "");
     // var msg = (this._socketData ? JSON.parse(this._socketData).msg : "");
     return (
-      <span>
-        <textarea rows="50" cols="80" value={cleanMsgs} >
+      <div className="col-sm-100">
+        <textarea ref='ta'
+                  // style={divStyle}
+                  rows="20"
+                  value={cleanMsgs}
+                  onChange={this.emptyFn}
+                  className='form-control' >
         </textarea>
-      </span>
+      </div>
     );
   }
 
@@ -103,5 +116,10 @@ var Sockets = React.createClass({
 
 
 });
+
+// var divStyle = {
+//   width: '500px',
+//   height: '500px'
+// };
 
 module.exports = Sockets;

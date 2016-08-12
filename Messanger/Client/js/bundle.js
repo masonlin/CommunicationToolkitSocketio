@@ -51,6 +51,62 @@
 	var MsgContext = __webpack_require__(209);
 
 
+	// var LBLUsername = React.createClass({
+	//   render: function() {
+	//     return (
+	//      <div>
+	//         <MsgContext data_spec="INI_DATA_USERNAME_LBL"/>
+	//      </div>
+	//     );
+	//   }
+	// });
+	//
+	// React.render(<LBLUsername />, document.getElementById('ini_data_username_lbl'));
+	//
+	//
+	//
+	var Username = React.createClass({displayName: "Username",
+	  render: function() {
+	    return (
+	     React.createElement("div", null, 
+	        React.createElement(MsgContext, {data_spec: "INI_DATA_USERNAME"})
+	     )
+	    );
+	  }
+	});
+
+	React.render(React.createElement(Username, null), document.getElementById('ini_data_username'));
+	//
+	//
+	//
+	// var LBLip = React.createClass({
+	//   render: function() {
+	//     return (
+	//      <div>
+	//         <MsgContext data_spec="INI_DATA_IP_LBL"/>
+	//      </div>
+	//     );
+	//   }
+	// });
+	//
+	// React.render(<LBLip />, document.getElementById('ini_data_ip_lbl'));
+	//
+	//
+	//
+	var Ip = React.createClass({displayName: "Ip",
+	  render: function() {
+	    return (
+	     React.createElement("div", null, 
+	        React.createElement(MsgContext, {data_spec: "INI_DATA_IP"})
+	     )
+	    );
+	  }
+	});
+
+	React.render(React.createElement(Ip, null), document.getElementById('ini_data_ip'));
+
+
+
 	var App = React.createClass({displayName: "App",
 	  componentDidMount(){
 	    SocketActionCreators.createSocket();
@@ -58,7 +114,7 @@
 
 	  render: function() {
 	    return (
-	     React.createElement("span", null, 
+	     React.createElement("div", null, 
 	        React.createElement(Socket, null)
 	     )
 	    );
@@ -70,16 +126,12 @@
 
 
 
-
 	var TypeMsg = React.createClass({displayName: "TypeMsg",
-	  // componentDidMount(){
-	  //
-	  // },
 
 	  render: function() {
 	    return (
-	     React.createElement("span", null, 
-	        React.createElement(MsgContext, null)
+	     React.createElement("div", null, 
+	        React.createElement(MsgContext, {data_spec: "INPUT_MSG"})
 	     )
 	    );
 	  }
@@ -19381,7 +19433,7 @@
 	  getSocketData: function(){
 	    if(oMasonConf.isDev == true){
 	      console.log('develop version');
-	      this.socket = socketio.connect('http://192.168.1.101:8080/');   //change to parameters (IP:PORT)
+	      this.socket = socketio.connect('http://192.168.1.105:8080/');   //change to parameters (IP:PORT)
 	    }else{
 	      console.log('rlease version');
 	      this.socket = socketio.connect('http://mason-restful.herokuapp.com');
@@ -19419,6 +19471,10 @@
 	    this.sendSocketData(input_msg);
 	  },
 
+
+	  emptyFn: function(){
+
+	  },
 
 	  getInitialState: function(){
 	    return {
@@ -19458,12 +19514,21 @@
 	      cleanMsgs += msgs[i];
 	    };
 
+	    if(this.refs.ta){
+	      var taNode = this.refs.ta.getDOMNode();
+	      taNode.scrollTop = taNode.scrollHeight;
+	    }
 	    console.log(msgs);
 	    // var user = (this._socketData ? JSON.parse(this._socketData).user : "");
 	    // var msg = (this._socketData ? JSON.parse(this._socketData).msg : "");
 	    return (
-	      React.createElement("span", null, 
-	        React.createElement("textarea", {rows: "50", cols: "80", value: cleanMsgs}
+	      React.createElement("div", {className: "col-sm-100"}, 
+	        React.createElement("textarea", {ref: "ta", 
+	                  // style={divStyle}
+	                  rows: "20", 
+	                  value: cleanMsgs, 
+	                  onChange: this.emptyFn, 
+	                  className: "form-control"}
 	        )
 	      )
 	    );
@@ -19473,6 +19538,11 @@
 
 
 	});
+
+	// var divStyle = {
+	//   width: '500px',
+	//   height: '500px'
+	// };
 
 	module.exports = Sockets;
 
@@ -27533,14 +27603,19 @@
 	var oMasonConf = new clsMasonConf();
 	var SocketActionCreators =  __webpack_require__(149);
 
+
 	var Msg_context = React.createClass({displayName: "Msg_context",
 	  handleClick: function(e){
 	    var msgNode = this.refs.input_text.getDOMNode();
+	    // console.log("msgNode1::");
+	    // console.log(msgNode);
 	    // console.log(msg);
 	    // this.setState({input_msg: msg})
 	    // return "OK";
 	    SocketActionCreators.sendMsg(msgNode.value);
 	    msgNode.value='';  //clean input box
+	    // console.log("msgNode2::");
+	    // console.log(msgNode);
 	    msgNode.focus();
 	  },
 
@@ -27550,29 +27625,72 @@
 
 
 	  render: function(){
-	    return (
-	      React.createElement("span", null, 
-	        React.createElement("input", {ref: "input_text", 
-	               type: "text", 
-	               name: "msg_context", 
-	               style: divStyle, 
-	               onKeyDown: (e) => {
-	                 if (e.keyCode == 13) {
-	                     console.log(e.keyCode);
-	                     this.handleClick();
-	                     console.log(e.keyCode);
-	                 }
-	               }}
-	        ), 
-	        React.createElement("input", {type: "button", value: "SEND", onClick: this.handleClick})
-	      )
-	    );
+
+	    switch(this.props.data_spec) {
+
+	      case "INI_DATA_USERNAME":
+	        return (
+	          React.createElement("div", null, 
+	            React.createElement("div", {className: "col-sm-3"}, 
+	              React.createElement("input", {ref: "ini_data_username", 
+	                     type: "text", 
+	                     name: "username", 
+	                     className: "form-control"}
+	              )
+	            )
+	          )
+	        );
+	        break;
+
+	      case "INI_DATA_IP":
+	        return (
+	          React.createElement("div", null, 
+	            React.createElement("div", {className: "col-sm-3"}, 
+	              React.createElement("input", {ref: "ini_data_ip", 
+	                     type: "text", 
+	                     name: "ip", 
+	                     className: "form-control"}
+	              )
+	            )
+	          )
+	        );
+	        break;
+
+	      case "INPUT_MSG":
+	        return (
+	          React.createElement("div", null, 
+	            React.createElement("div", {className: "col-sm-100"}, 
+	              React.createElement("input", {ref: "input_text", 
+	                     type: "text", 
+	                     name: "msg_context", 
+	                    //  style={divStyle}
+	                     onKeyDown: (e) => {
+	                       if (e.keyCode == 13) {
+	                           console.log(e.keyCode);
+	                           this.handleClick();
+	                           console.log(e.keyCode);
+	                       }
+	                     }, 
+	                     className: "form-control"}
+	              )
+	            ), 
+	            React.createElement("br", null), 
+	            React.createElement("div", {className: "col-sm-100"}, 
+	              React.createElement("input", {type: "button", value: "SEND", onClick: this.handleClick, className: "btn btn-default"})
+	            )
+	          )
+	        );
+
+	      default:
+	    }
+
+
 	  }
 	});
 
-	var divStyle = {
-	  width: '500px'
-	};
+	// var divStyle = {
+	//   width: '500px'
+	// };
 
 	module.exports = Msg_context;
 

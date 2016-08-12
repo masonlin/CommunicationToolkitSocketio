@@ -9,27 +9,65 @@
 		<title>Messanger</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<script src="./js/build/react.js"></script>
-		<script src="./js/build/react-dom.js"></script>
-		<!-- <script src="./build/browser.min.js"></script> -->
-    <script src="./js/jquery-1.11.3.min.js"></script>
+
     <link rel="stylesheet" href="./css/mason_css.css" />
+		<link rel="stylesheet" href="./dist/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="./dist/css/bootstrap-theme.min.css" />
+
+		<script src="./js/jquery-1.11.3.min.js"></script>
+		<script src="./dist/js/bootstrap.min.js"></script>
 	</head>
-	<body>
-      <table>
+	<body background="./images/bk.jpg">
+      <!-- <table>
 				<tr >
           <td class='hismsg'><div id='app'/></td>
-		    </tr>
+		    </tr> -->
         <!-- http://192.168.1.101:8080 -->
-			  <tr>
-				  <!-- <td><input type="text" name="FirstName" value='12456'></td> -->
-				  <td><div id='type_msg'/></td>
+			  <!-- <tr>
+				  <td><div id='type_msg' /></td>
 			  </tr>
 
-		  </table>
+		  </table> -->
 
+
+
+			<!-- <img src="./images/bk.jpg" class="img-responsive" alt="Cinque Terre" width="304" height="236"> -->
+			<div class="container" >
+				<h2 class="tt">Communication Toolkit - Messanger</h2>
+			  <p class="tt">Type your name, server IP and server Port</p>
+				<form role="form">
+					<div class="form-group">
+			      <label class="col-sm-2">Your Name</label>
+						<div class="col-sm-10" id='ini_data_username' />
+			    </div>
+					<div class="form-group">
+			      <label class="col-sm-2">Messanger IP</label>
+						<div class="col-sm-10" id='ini_data_ip'  />
+			    </div>
+					<div class="form-group">
+						<!--just space-->
+					</div>
+					<div class="form-group">
+	          <div id='app'/>
+					</div>
+					<div class="form-group">
+            <!--just space-->
+					</div>
+	      </form>
+		  </div>
+      <div id='type_msg' />
+
+			<!-- <script src="./js/build/react.js"></script>
+			<script src="./js/build/react-dom.js"></script> -->
 			<script src="./js/bundle.js"></script>
+			<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.js"></script> -->
+			<!-- <script src="./js/app.js"></script> -->
 
-
+      <br/><br/><br/><br/><br/><br/>
+			<footer id='id_footer'>
+			  <p class='tt'>Posted by: masonlin</p>
+				<p class='tt'>Contact information: <a class='tt' href="mailto:c.c.lin@g.ncu.edu.tw">c.c.lin@g.ncu.edu.tw</a>.</p>
+				<p class='tt'>2016 @Taiwan</p>
+			</footer>
 	</body>
 </html>

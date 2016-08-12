@@ -4,6 +4,20 @@ td.hismsg {
   vertical-align: bottom;
 }
 
+a.tt, p.tt,h2.tt {
+  color:white;
+}
+
+#id_footer {
+    /* 設定footer的高度 */
+    height: 1px;
+    box-sizing: border-box;
+    /* 設定footer絕對位置在底部 */
+    position: absolute;
+    bottom: 1;
+    /* 展開footer寬度 */
+    width: 100%;
+}
 
 span.faa {
   /*動畫*/

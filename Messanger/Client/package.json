@@ -9,7 +9,8 @@
     "object-assign": "^1.0.0",
     "react": "^0.12.2",
     "react-dom": "=15.3.0",
-    "socket.io-client": "=1.4.8"
+    "socket.io-client": "=1.4.8",
+    "react-bootstrap": "=0.30.2"
   },
   "devDependencies": {
     "jsx-loader": "^0.12.2",
