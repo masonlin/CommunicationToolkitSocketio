@@ -9,7 +9,7 @@ Use **Node/Socket.io/React/Flux/BootStrap** to implement a suit communication to
 
 2. share picture on - Sharing (20%)  
 
-  **Socket.io-stream**
+  **Socket.io-stream/base-64**
 
 3. share file (0%)　　
 
