@@ -5,66 +5,23 @@ var Socket = require('./views/sockets');
 var MsgContext = require('./views/messanger_view');
 
 
-// var LBLUsername = React.createClass({
-//   render: function() {
-//     return (
-//      <div>
-//         <MsgContext data_spec="INI_DATA_USERNAME_LBL"/>
-//      </div>
-//     );
-//   }
-// });
-//
-// React.render(<LBLUsername />, document.getElementById('ini_data_username_lbl'));
-//
-//
-//
-var Username = React.createClass({
+var IniData = React.createClass({
   render: function() {
     return (
      <div>
-        <MsgContext data_spec="INI_DATA_USERNAME"/>
+        <MsgContext data_spec="INI_DATA"/>
      </div>
     );
   }
 });
 
-React.render(<Username />, document.getElementById('ini_data_username'));
-//
-//
-//
-// var LBLip = React.createClass({
-//   render: function() {
-//     return (
-//      <div>
-//         <MsgContext data_spec="INI_DATA_IP_LBL"/>
-//      </div>
-//     );
-//   }
-// });
-//
-// React.render(<LBLip />, document.getElementById('ini_data_ip_lbl'));
-//
-//
-//
-var Ip = React.createClass({
-  render: function() {
-    return (
-     <div>
-        <MsgContext data_spec="INI_DATA_IP"/>
-     </div>
-    );
-  }
-});
-
-React.render(<Ip />, document.getElementById('ini_data_ip'));
-
+React.render(<IniData />, document.getElementById('ini_data'));
 
 
 var App = React.createClass({
-  componentDidMount(){
-    SocketActionCreators.createSocket();
-  },
+  // componentDidMount(){
+  //   SocketActionCreators.createSocket();
+  // },
 
   render: function() {
     return (

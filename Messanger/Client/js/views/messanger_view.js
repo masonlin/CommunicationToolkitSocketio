@@ -1,5 +1,4 @@
 var React = require('react');
-// var ReactDOM = require('react-dom');
 var socketio = require('socket.io-client');
 var SocketStore = require('../stores/stores');
 var clsMasonConf = require('../masonconf');
@@ -10,16 +9,17 @@ var SocketActionCreators =  require('../actions/socket-action-creators');
 var Msg_context = React.createClass({
   handleClick: function(e){
     var msgNode = this.refs.input_text.getDOMNode();
-    // console.log("msgNode1::");
-    // console.log(msgNode);
-    // console.log(msg);
-    // this.setState({input_msg: msg})
-    // return "OK";
     SocketActionCreators.sendMsg(msgNode.value);
     msgNode.value='';  //clean input box
-    // console.log("msgNode2::");
-    // console.log(msgNode);
     msgNode.focus();
+  },
+
+  handleJoinClick: function(e){
+    var IniData = {
+      usernameNode: this.refs.ini_data_username.getDOMNode().value,
+      ipNode: this.refs.ini_data_ip.getDOMNode().value
+    };
+    SocketActionCreators.createSocket(IniData);
   },
 
   getInitialState: function(){
@@ -30,8 +30,7 @@ var Msg_context = React.createClass({
   render: function(){
 
     switch(this.props.data_spec) {
-
-      case "INI_DATA_USERNAME":
+      case "INI_DATA":
         return (
           <div>
             <div className="col-sm-3">
@@ -39,21 +38,28 @@ var Msg_context = React.createClass({
                      type='text'
                      name='username'
                      className='form-control'
+                     placeholder="Type Your ID"
               />
             </div>
-          </div>
-        );
-        break;
-
-      case "INI_DATA_IP":
-        return (
-          <div>
             <div className="col-sm-3">
               <input ref='ini_data_ip'
                      type='text'
                      name='ip'
                      className='form-control'
+                     placeholder="Type Server IP"
               />
+            </div>
+            <div className="col-sm-3">
+              <button ref='ini_data_join'
+                      type="button"
+                      className="btn btn-default"
+                      data-toggle="collapse"
+                      data-target="#demo"
+                      onClick={this.handleJoinClick}
+              >Join</button>
+            </div>
+            <div className="col-sm-3">
+              {/*adjust bootstrap*/}
             </div>
           </div>
         );

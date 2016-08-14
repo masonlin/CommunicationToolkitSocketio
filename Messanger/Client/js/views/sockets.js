@@ -7,18 +7,51 @@ var oMasonConf = new clsMasonConf();
 var Sockets = React.createClass({
   _socketData: [],
   socket: null,
+  _userName: '',
 
-  getSocketData: function(){
+  // getSocketData: function(){
+  //   if(oMasonConf.isDev == true){
+  //     console.log('develop version');
+  //     this.socket = socketio.connect('http://192.168.1.101:8080/');   //change to parameters (IP:PORT)
+  //   }else{
+  //     console.log('rlease version');
+  //     this.socket = socketio.connect('http://mason-restful.herokuapp.com');
+  //   }
+  //
+  //   //var helo = 'Hi, nice to see you again.';
+  //   var helo = 'Hi, nice to meet you.';
+  //   // console.log('send' + fuck);
+  //   this.socket.emit('s_msg', JSON.stringify({ user: 'Bot', msg: helo }))
+  //   // console.log('send OK');
+  //   //
+  //
+  //   this.socket.on('c_msg', function(data){
+  //     // console.log('get msg:' + data);
+  //     // this._socketData = data;
+  //     this._socketData.push(data);
+  //     // this.setState(data);
+  //     console.log(this._socketData);
+  //     this.setState(JSON.parse(data));
+  //   }.bind(this));
+  // },
+  // onChange: function(){
+  //   this.getSocketData();
+  // },
+
+  getSocketData: function(iniDatas){
     if(oMasonConf.isDev == true){
       console.log('develop version');
-      this.socket = socketio.connect('http://192.168.1.105:8080/');   //change to parameters (IP:PORT)
+      console.log(iniDatas);
+      this.socket && this.socket.disconnect();                              //disconnect socket if it has connection
+      this.socket = socketio.connect('http://' + iniDatas.ip + ':8080/');   //change to parameters (IP:PORT)
+      this._userName = iniDatas.username;
     }else{
       console.log('rlease version');
       this.socket = socketio.connect('http://mason-restful.herokuapp.com');
     }
 
     //var helo = 'Hi, nice to see you again.';
-    var helo = 'Hi, nice to meet you.';
+    var helo = 'Hi ' + iniDatas.username + ', nice to meet you.';
     // console.log('send' + fuck);
     this.socket.emit('s_msg', JSON.stringify({ user: 'Bot', msg: helo }))
     // console.log('send OK');
@@ -33,8 +66,8 @@ var Sockets = React.createClass({
       this.setState(JSON.parse(data));
     }.bind(this));
   },
-  onChange: function(){
-    this.getSocketData();
+  onChange: function(iniDatas){
+    this.getSocketData(iniDatas);
   },
 
 
@@ -42,7 +75,7 @@ var Sockets = React.createClass({
     // var in_msg = input_msg || 'TESTTESTTESTTTTT!';
     var in_msg = input_msg;
     // console.log(in_msg);
-    this.socket.emit('s_msg', JSON.stringify({ user: 'me', msg: in_msg  }));    //要改成TEXTBOX裡的訊息,及USER
+    this.socket.emit('s_msg', JSON.stringify({ user: this._userName, msg: in_msg  }));    //要改成TEXTBOX裡的訊息,及USER
   },
   onSend: function(input_msg){
     // console.log('onSend:' + input_msg);
@@ -50,9 +83,7 @@ var Sockets = React.createClass({
   },
 
 
-  emptyFn: function(){
-
-  },
+  emptyFn: function(){},
 
   getInitialState: function(){
     return {

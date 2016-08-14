@@ -51,66 +51,23 @@
 	var MsgContext = __webpack_require__(209);
 
 
-	// var LBLUsername = React.createClass({
-	//   render: function() {
-	//     return (
-	//      <div>
-	//         <MsgContext data_spec="INI_DATA_USERNAME_LBL"/>
-	//      </div>
-	//     );
-	//   }
-	// });
-	//
-	// React.render(<LBLUsername />, document.getElementById('ini_data_username_lbl'));
-	//
-	//
-	//
-	var Username = React.createClass({displayName: "Username",
+	var IniData = React.createClass({displayName: "IniData",
 	  render: function() {
 	    return (
 	     React.createElement("div", null, 
-	        React.createElement(MsgContext, {data_spec: "INI_DATA_USERNAME"})
+	        React.createElement(MsgContext, {data_spec: "INI_DATA"})
 	     )
 	    );
 	  }
 	});
 
-	React.render(React.createElement(Username, null), document.getElementById('ini_data_username'));
-	//
-	//
-	//
-	// var LBLip = React.createClass({
-	//   render: function() {
-	//     return (
-	//      <div>
-	//         <MsgContext data_spec="INI_DATA_IP_LBL"/>
-	//      </div>
-	//     );
-	//   }
-	// });
-	//
-	// React.render(<LBLip />, document.getElementById('ini_data_ip_lbl'));
-	//
-	//
-	//
-	var Ip = React.createClass({displayName: "Ip",
-	  render: function() {
-	    return (
-	     React.createElement("div", null, 
-	        React.createElement(MsgContext, {data_spec: "INI_DATA_IP"})
-	     )
-	    );
-	  }
-	});
-
-	React.render(React.createElement(Ip, null), document.getElementById('ini_data_ip'));
-
+	React.render(React.createElement(IniData, null), document.getElementById('ini_data'));
 
 
 	var App = React.createClass({displayName: "App",
-	  componentDidMount(){
-	    SocketActionCreators.createSocket();
-	  },
+	  // componentDidMount(){
+	  //   SocketActionCreators.createSocket();
+	  // },
 
 	  render: function() {
 	    return (
@@ -19078,12 +19035,15 @@
 
 	module.exports = {
 
-	  createSocket: function(){
+	  createSocket: function(iniData){
 	    console.log('Active here');
+	    // console.log(iniData);
 	    var action = {
-	      actionType: "CREATE_SOCKET"
+	      actionType: "CREATE_SOCKET",
+	      username: iniData.usernameNode,
+	      ip: iniData.ipNode
 	    };
-
+	    
 	    AppSocketDispatcher.dispatch(action);
 	  },
 
@@ -19429,18 +19389,51 @@
 	var Sockets = React.createClass({displayName: "Sockets",
 	  _socketData: [],
 	  socket: null,
+	  _userName: '',
 
-	  getSocketData: function(){
+	  // getSocketData: function(){
+	  //   if(oMasonConf.isDev == true){
+	  //     console.log('develop version');
+	  //     this.socket = socketio.connect('http://192.168.1.101:8080/');   //change to parameters (IP:PORT)
+	  //   }else{
+	  //     console.log('rlease version');
+	  //     this.socket = socketio.connect('http://mason-restful.herokuapp.com');
+	  //   }
+	  //
+	  //   //var helo = 'Hi, nice to see you again.';
+	  //   var helo = 'Hi, nice to meet you.';
+	  //   // console.log('send' + fuck);
+	  //   this.socket.emit('s_msg', JSON.stringify({ user: 'Bot', msg: helo }))
+	  //   // console.log('send OK');
+	  //   //
+	  //
+	  //   this.socket.on('c_msg', function(data){
+	  //     // console.log('get msg:' + data);
+	  //     // this._socketData = data;
+	  //     this._socketData.push(data);
+	  //     // this.setState(data);
+	  //     console.log(this._socketData);
+	  //     this.setState(JSON.parse(data));
+	  //   }.bind(this));
+	  // },
+	  // onChange: function(){
+	  //   this.getSocketData();
+	  // },
+
+	  getSocketData: function(iniDatas){
 	    if(oMasonConf.isDev == true){
 	      console.log('develop version');
-	      this.socket = socketio.connect('http://192.168.1.105:8080/');   //change to parameters (IP:PORT)
+	      console.log(iniDatas);
+	      this.socket && this.socket.disconnect();                              //disconnect socket if it has connection
+	      this.socket = socketio.connect('http://' + iniDatas.ip + ':8080/');   //change to parameters (IP:PORT)
+	      this._userName = iniDatas.username;
 	    }else{
 	      console.log('rlease version');
 	      this.socket = socketio.connect('http://mason-restful.herokuapp.com');
 	    }
 
 	    //var helo = 'Hi, nice to see you again.';
-	    var helo = 'Hi, nice to meet you.';
+	    var helo = 'Hi ' + iniDatas.username + ', nice to meet you.';
 	    // console.log('send' + fuck);
 	    this.socket.emit('s_msg', JSON.stringify({ user: 'Bot', msg: helo }))
 	    // console.log('send OK');
@@ -19455,8 +19448,8 @@
 	      this.setState(JSON.parse(data));
 	    }.bind(this));
 	  },
-	  onChange: function(){
-	    this.getSocketData();
+	  onChange: function(iniDatas){
+	    this.getSocketData(iniDatas);
 	  },
 
 
@@ -19464,7 +19457,7 @@
 	    // var in_msg = input_msg || 'TESTTESTTESTTTTT!';
 	    var in_msg = input_msg;
 	    // console.log(in_msg);
-	    this.socket.emit('s_msg', JSON.stringify({ user: 'me', msg: in_msg  }));    //要改成TEXTBOX裡的訊息,及USER
+	    this.socket.emit('s_msg', JSON.stringify({ user: this._userName, msg: in_msg  }));    //要改成TEXTBOX裡的訊息,及USER
 	  },
 	  onSend: function(input_msg){
 	    // console.log('onSend:' + input_msg);
@@ -19472,9 +19465,7 @@
 	  },
 
 
-	  emptyFn: function(){
-
-	  },
+	  emptyFn: function(){},
 
 	  getInitialState: function(){
 	    return {
@@ -27170,11 +27161,23 @@
 
 	var Stores = assign({}, EventEmitter.prototype, {
 
-	  emitChange: function() {
-	    this.emit('change');
+	  // emitChange: function() {
+	  //   this.emit('change');
+	  // },
+	  // addChangeListener: function(callback) {
+	  //   this.on('change', callback);    //callback 裡是當store收到新的action任務時，用來通知react view更新state用。
+	  // },
+	  _IniDatas: {
+	    username:'',
+	    ip:''
+	  },
+	  emitChange: function(action) {
+	    this._IniDatas.username = action.username;
+	    this._IniDatas.ip = action.ip;
+	    this.emit('change', this._IniDatas);
 	  },
 	  addChangeListener: function(callback) {
-	    this.on('change', callback);    //callback 裡是當store收到新的action任務時，用來通知react view更新state用。
+	    this.on('change', callback, this._IniDatas);    //callback 裡是當store收到新的action任務時，用來通知react view更新state用。
 	  },
 	  removeChangeListener: function(callback) {
 	    this.removeListener('change', callback);
@@ -27194,10 +27197,6 @@
 	  }
 
 
-
-	  // getAll: function() {
-	  //   return comments;
-	  // }
 	});
 
 	AppDispatcher.register(function(action) {
@@ -27206,7 +27205,8 @@
 
 	    case "CREATE_SOCKET":
 	      // console.log('CREATE_SOCKET');
-	      Stores.emitChange();
+	      // Stores.emitChange();
+	      Stores.emitChange(action);
 	      break;
 
 	    case "SEND_MSG":
@@ -27596,7 +27596,6 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	// var ReactDOM = require('react-dom');
 	var socketio = __webpack_require__(155);
 	var SocketStore = __webpack_require__(205);
 	var clsMasonConf = __webpack_require__(208);
@@ -27607,16 +27606,17 @@
 	var Msg_context = React.createClass({displayName: "Msg_context",
 	  handleClick: function(e){
 	    var msgNode = this.refs.input_text.getDOMNode();
-	    // console.log("msgNode1::");
-	    // console.log(msgNode);
-	    // console.log(msg);
-	    // this.setState({input_msg: msg})
-	    // return "OK";
 	    SocketActionCreators.sendMsg(msgNode.value);
 	    msgNode.value='';  //clean input box
-	    // console.log("msgNode2::");
-	    // console.log(msgNode);
 	    msgNode.focus();
+	  },
+
+	  handleJoinClick: function(e){
+	    var IniData = {
+	      usernameNode: this.refs.ini_data_username.getDOMNode().value,
+	      ipNode: this.refs.ini_data_ip.getDOMNode().value
+	    };
+	    SocketActionCreators.createSocket(IniData);
 	  },
 
 	  getInitialState: function(){
@@ -27627,30 +27627,36 @@
 	  render: function(){
 
 	    switch(this.props.data_spec) {
-
-	      case "INI_DATA_USERNAME":
+	      case "INI_DATA":
 	        return (
 	          React.createElement("div", null, 
 	            React.createElement("div", {className: "col-sm-3"}, 
 	              React.createElement("input", {ref: "ini_data_username", 
 	                     type: "text", 
 	                     name: "username", 
-	                     className: "form-control"}
+	                     className: "form-control", 
+	                     placeholder: "Type Your ID"}
 	              )
-	            )
-	          )
-	        );
-	        break;
-
-	      case "INI_DATA_IP":
-	        return (
-	          React.createElement("div", null, 
+	            ), 
 	            React.createElement("div", {className: "col-sm-3"}, 
 	              React.createElement("input", {ref: "ini_data_ip", 
 	                     type: "text", 
 	                     name: "ip", 
-	                     className: "form-control"}
+	                     className: "form-control", 
+	                     placeholder: "Type Server IP"}
 	              )
+	            ), 
+	            React.createElement("div", {className: "col-sm-3"}, 
+	              React.createElement("button", {ref: "ini_data_join", 
+	                      type: "button", 
+	                      className: "btn btn-default", 
+	                      "data-toggle": "collapse", 
+	                      "data-target": "#demo", 
+	                      onClick: this.handleJoinClick
+	              }, "Join")
+	            ), 
+	            React.createElement("div", {className: "col-sm-3"}
+	              /*adjust bootstrap*/
 	            )
 	          )
 	        );

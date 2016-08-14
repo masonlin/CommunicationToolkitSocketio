@@ -4,11 +4,23 @@ var assign = require('object-assign');
 
 var Stores = assign({}, EventEmitter.prototype, {
 
-  emitChange: function() {
-    this.emit('change');
+  // emitChange: function() {
+  //   this.emit('change');
+  // },
+  // addChangeListener: function(callback) {
+  //   this.on('change', callback);    //callback 裡是當store收到新的action任務時，用來通知react view更新state用。
+  // },
+  _IniDatas: {
+    username:'',
+    ip:''
+  },
+  emitChange: function(action) {
+    this._IniDatas.username = action.username;
+    this._IniDatas.ip = action.ip;
+    this.emit('change', this._IniDatas);
   },
   addChangeListener: function(callback) {
-    this.on('change', callback);    //callback 裡是當store收到新的action任務時，用來通知react view更新state用。
+    this.on('change', callback, this._IniDatas);    //callback 裡是當store收到新的action任務時，用來通知react view更新state用。
   },
   removeChangeListener: function(callback) {
     this.removeListener('change', callback);
@@ -28,10 +40,6 @@ var Stores = assign({}, EventEmitter.prototype, {
   }
 
 
-
-  // getAll: function() {
-  //   return comments;
-  // }
 });
 
 AppDispatcher.register(function(action) {
@@ -40,7 +48,8 @@ AppDispatcher.register(function(action) {
 
     case "CREATE_SOCKET":
       // console.log('CREATE_SOCKET');
-      Stores.emitChange();
+      // Stores.emitChange();
+      Stores.emitChange(action);
       break;
 
     case "SEND_MSG":

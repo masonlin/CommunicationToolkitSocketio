@@ -2,12 +2,15 @@ var AppSocketDispatcher = require('../dispatcher/app-dispatcher');
 
 module.exports = {
 
-  createSocket: function(){
+  createSocket: function(iniData){
     console.log('Active here');
+    // console.log(iniData);
     var action = {
-      actionType: "CREATE_SOCKET"
+      actionType: "CREATE_SOCKET",
+      username: iniData.usernameNode,
+      ip: iniData.ipNode
     };
-
+    
     AppSocketDispatcher.dispatch(action);
   },
 
