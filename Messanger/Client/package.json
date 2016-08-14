@@ -1,9 +1,9 @@
 {
-  "author": "Mason Lin",
-  "name": "Frontend",
+  "author": "masonlin",
+  "name": "messanger",
   "version": "0.0.1",
-  "description": "Personal profile page",
-  "repository": "https://github.com/masonlin/Reactjs-Flux-personal-profile",
+  "description": "messanger",
+  "repository": "https://github.com/masonlin/CommunicationToolkitSocketio/blob/master/README.md",
   "dependencies": {
     "flux": "^2.0.0",
     "object-assign": "^1.0.0",
