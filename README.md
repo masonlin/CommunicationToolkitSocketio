@@ -2,7 +2,7 @@
 Use **Node/Socket.io/React/Flux/BootStrap** to implement a suit communication tool and use **Webpack** to create the bundle.　　
 
 =============
-1. realtime send message - Messanger (100%)　　
+1. Messanger (100%) - realtime message and anonymous sharing infomation.  　　
 
 ![messanger] (http://web.cc.ncu.edu.tw/~104554013/images/Messanger) ![MessangerIPhone] (http://web.cc.ncu.edu.tw/~104554013/images/MessangerIPhone6P.png)  
 
