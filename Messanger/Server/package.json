@@ -2,6 +2,8 @@
   "author": "masonlin",
   "name": "messanger",
   "version": "0.0.1",
+  "description": "messanger",
+  "repository": "https://github.com/masonlin/CommunicationToolkitSocketio/blob/master/README.md",  
   "main": "messanger.js",
   "dependencies": {
     "express": "4.13.x",
