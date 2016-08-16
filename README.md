@@ -7,9 +7,7 @@ Use **Node/Socket.io/React/Flux/BootStrap** to implement a suit communication to
   ![messanger] (http://web.cc.ncu.edu.tw/~104554013/images/Messanger) ![MessangerIPhone] (http://web.cc.ncu.edu.tw/~104554013/images/MessangerIPhone6P.png)  
 
 
-2. share picture on - Sharing (20%)  
-
-  **Socket.io-stream/base-64**
+2. share photo on - Sharing (80%)  
 
 3. share file (0%)　　
 
