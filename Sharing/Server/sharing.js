@@ -8,7 +8,8 @@
 
 const express = require('express');
 const socketIO = require('socket.io');
-const ss = require('socket.io-stream');
+// const ss_in = require('socket.io-stream');
+// const ss_out = require('socket.io-stream');
 const path = require('path');
 const fs = require('fs');
 
@@ -20,27 +21,24 @@ const io = socketIO(server);
 
 // io.of('/user')
 io.on('connection', (socket) => {
-  ss(socket).on('s_file', (stream, data) => {
-    // console.log("stream======");
-    // console.log(stream);
-    // console.log("data======");
-    // console.log(data);
+  socket.on('s_file', (data) => {
 
-    // var blobStream = ss.createBlobReadStream(file);
-    // var size = 0;
-    //
-    // blobStream.on('data', function(chunk) {
-    //   size += chunk.length;
-    //   console.log(Math.floor(size / file.size * 100) + '%');
-    //   // -> e.g. '42%'
-    // });
-    //
-    // blobStream.pipe(stream);
-
+    console.log('=====readFile=======');
     console.log(data);
-    var filename = path.basename(data.name);
-    // var filename = path.basename(data.size);
-    stream.pipe(fs.createWriteStream('./image_store/' + filename));
+    // var filename = path.basename(data.filename);
+    // var stream_out = ss_out.createStream();
+    socket.emit('c_file', data);
+    console.log('return to client ===');
+
+    //
+    //broadcast
+    //
+
+    //
+    // use dirrectly in/out stream //這裡再改成收到串流後，轉而將串流直接廣播出去給所有使用者
+    //
+
+
   });
 
 
