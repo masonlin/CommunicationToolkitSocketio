@@ -67,11 +67,12 @@
 
 
 	var Images = React.createClass({displayName: "Images",
-	  // componentDidMount(){
-	  //   SocketActionCreators.createSocket();
-	  // },
-
 	  render: function() {
+	    // var ar = React.Children.map(SocketData, function(child){
+	    //   console.log('child::');
+	    //   console.log(child.props);
+	    // })
+
 	    return (
 	     React.createElement("div", null, 
 	        React.createElement(SocketData, null)
@@ -80,11 +81,11 @@
 	  }
 	});
 
-	// ReactDOM.render(<App />, document.getElementById('app'));
-	React.render(React.createElement(Images, null), document.getElementById('images'));
+	// React.render(<Images />, document.getElementById('images'));
+	React.render(React.createElement(SocketData, null), document.getElementById('images'));
 
 
-	var SelFile = React.createClass({displayName: "SelFile",
+	var InitialView = React.createClass({displayName: "InitialView",
 	  render: function() {
 	    return (
 	      React.createElement("div", null, 
@@ -94,7 +95,7 @@
 	  }
 	});
 
-	React.render(React.createElement(SelFile, null), document.getElementById('selfile'));
+	React.render(React.createElement(InitialView, null), document.getElementById('iniview'));
 
 
 /***/ },
@@ -19381,18 +19382,12 @@
 
 	var React = __webpack_require__(1);
 	var socketio = __webpack_require__(155);
-	// var ss = require('socket.io-stream');
 	var base64 = __webpack_require__(203);
 	var utf8 = __webpack_require__(204);
 	var SocketStore = __webpack_require__(205);
 	var clsMasonConf = __webpack_require__(208);
 	var oMasonConf = new clsMasonConf();
 	var path = __webpack_require__(209);
-	// var BufferStreamReader = require('buffer-stream-reader');
-	// var mystream = require('stream');
-	// var util = require('util');
-	// var WritableStream = require('../writable-stream');
-
 
 	var Sockets = React.createClass({displayName: "Sockets",
 	  _socketData: [],
@@ -19404,6 +19399,16 @@
 	      this.socket && this.socket.disconnect();                              //disconnect socket if it has connection
 	      this.socket = socketio.connect('http://' + iniDatas.ip + ':8080/');   //change to parameters (IP:PORT)
 	      this._userName = iniDatas.username;
+
+	      this.socket.on('c_file', function(data){
+	        console.log('======in c_file======');
+	        // console.log(data);
+	        // console.log(this._socketData);
+	        this._socketData.push(data);
+	        // console.log(this._socketData);
+	         this.setState(JSON.parse(data));
+	      }.bind(this));
+
 	    }else{
 	      // console.log('rlease version');
 	      // this.socket = socketio.connect('http://mason-restful.herokuapp.com');
@@ -19418,35 +19423,26 @@
 
 	  sendSocketData: function(inputFile) {
 	    console.log('======in sendSocketData======');
-	    console.log(inputFile);
+	    // console.log(inputFile);
 
 	    var FR= new FileReader();
 
-	    console.log(inputFile);
 	    var fileData;
 	    var reader = new FileReader();
 	    FR.onloadend = function() {
 	      fileData = FR.result;
-
+	      console.log('================load and emit file=======================');
 	      this.socket.emit('s_file', JSON.stringify({size: inputFile.size,
 	                                                 filename: inputFile.name,
 	                                                 username: this._userName,
 	                                                 file: fileData}));
 	    }.bind(this);
-	    console.log(FR.readAsDataURL(inputFile));
-
-
-	    this.socket.on('c_file', function(data){
-	      console.log('======in c_file======');
-	      this._socketData.push(data);
-	      this.setState(JSON.parse(data));
-	    }.bind(this));
+	    // console.log(FR.readAsDataURL(inputFile));
+	    FR.readAsDataURL(inputFile)
 	  },
 	  onSend: function(inputData) {
 	    this.sendSocketData(inputData);
 	  },
-
-
 
 
 	  emptyFn: function(){},
@@ -19468,24 +19464,61 @@
 	  },
 
 	  render: function() {
-	    console.log(this._socketData);
+	    // console.log(this._socketData);
 	    var images = this._socketData.map(function(content, index) {
 	      var file = JSON.parse(content).file;
 	      var user = JSON.parse(content).username;
 	      var idx = user + '-' + (new Date()).toString() + '-' + index;
 
+	      // return (
+	      //   <div>
+	      //     <img src={file} key={idx} className="img-thumbnail" alt="Cinque Terre" width="304" height="236"/> {user}
+	      //   </div>
+	      // );
 	      return (
-	        React.createElement("div", null, 
-	          React.createElement("img", {src: file, key: idx}), " ", user
+	        React.createElement("div", {className: "col-md-4"}, 
+	          React.createElement("h2", null, "From ", user, " :"), 
+	          React.createElement("img", {src: file, key: idx, className: "img-thumbnail", width: "500", height: "500"})
 	        )
 	      );
 	    });
 
 	    return (
-	      React.createElement("div", null, 
+	      React.createElement("div", {className: "row"}, 
 	          images
 	      )
 	    );
+
+	    // return (
+	    //   <div className="carousel-inner">
+	    //     {images}
+	    //   </div>
+	    // );
+
+	    // console.log(images);
+	    // return (
+	    //   <div id="myCarousel" className="carousel slide" data-ride="carousel">
+	    //
+	    //     <ol className="carousel-indicators">
+	    //       <li data-target="#myCarousel" data-slide-to="0" className="active"></li>
+	    //       <li data-target="#myCarousel" data-slide-to="1"></li>
+	    //       <li data-target="#myCarousel" data-slide-to="2"></li>
+	    //       <li data-target="#myCarousel" data-slide-to="3"></li>
+	    //     </ol>
+	    //
+	    //
+	    //     <div className="carousel-inner">
+	    //       {images}
+	    //     </div>
+	    //
+	    //     <a className="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+	    //       <span className="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+	    //     </a>
+	    //     <a className="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+	    //       <span className="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+	    //     </a>
+	    //   </div>
+	    // );
 
 	  }
 

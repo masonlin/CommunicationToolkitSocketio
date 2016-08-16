@@ -21,11 +21,12 @@ React.render(<IniData />, document.getElementById('ini_data'));
 
 
 var Images = React.createClass({
-  // componentDidMount(){
-  //   SocketActionCreators.createSocket();
-  // },
-
   render: function() {
+    // var ar = React.Children.map(SocketData, function(child){
+    //   console.log('child::');
+    //   console.log(child.props);
+    // })
+
     return (
      <div>
         <SocketData />
@@ -34,11 +35,11 @@ var Images = React.createClass({
   }
 });
 
-// ReactDOM.render(<App />, document.getElementById('app'));
-React.render(<Images />, document.getElementById('images'));
+// React.render(<Images />, document.getElementById('images'));
+React.render(<SocketData />, document.getElementById('images'));
 
 
-var SelFile = React.createClass({
+var InitialView = React.createClass({
   render: function() {
     return (
       <div>
@@ -48,4 +49,4 @@ var SelFile = React.createClass({
   }
 });
 
-React.render(<SelFile />, document.getElementById('selfile'));
+React.render(<InitialView />, document.getElementById('iniview'));
