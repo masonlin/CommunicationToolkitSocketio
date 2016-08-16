@@ -6,8 +6,10 @@ Use **Node/Socket.io/React/Flux/BootStrap** to implement a suit communication to
 
   ![messanger] (http://web.cc.ncu.edu.tw/~104554013/images/Messanger) ![MessangerIPhone] (http://web.cc.ncu.edu.tw/~104554013/images/MessangerIPhone6P.png)  
 
+   這個即時訊息傳送網頁程式是利用Socket.io作為媒介，所有的用戶在前端輸入伺服器IP及自己的匿稱後，即可隨時加入進行即時通信。  
+   
 
-2. share photo on - Sharing (80%)  
+2. share photo on - Sharing (90%)  
 
 3. share file (0%)　　
 
