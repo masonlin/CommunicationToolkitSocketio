@@ -9,9 +9,12 @@ Use **Node/Socket.io/React/Flux/BootStrap** to implement a suit communication to
    這個即時訊息傳送網頁程式是利用Socket.io作為媒介，所有的用戶在前端輸入伺服器IP及自己的匿稱後，即可隨時加入進行即時通信。因前端使用Bootstrap，故可在一般電腦上透過瀏覽器使用，或在行動裝置的瀏覽器使用。
    
 
-2. share photo on - Sharing (99%)  
+2. share photo on - Sharing (100%)  
+  
+3. Refactoring Sharing - Sharing2 (10%)  
    *   Refactoring for the gallery features, change codes from ES5 to ES6 (10%)  
-   -   Add react-image-gallery.js
+   *   Add react-image-gallery.js  
+
 3. share file (0%)　　
 
 4. vedio and audio stream (webRTC) (0%)　　
