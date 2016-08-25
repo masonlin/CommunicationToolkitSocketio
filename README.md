@@ -11,9 +11,10 @@ Use **Node/Socket.io/React/Flux/BootStrap** to implement a suit communication to
 
 2. share photo on - Sharing (100%)  
   
-3. Refactoring Sharing - Sharing2 (10%)  
+3. Refactoring Sharing - Sharing2 (30%)  
    *   Refactoring for the gallery features, change codes from ES5 to ES6 (10%)  
    *   Add react-image-gallery.js  
+   *   Use babel-cli to replace the ES6 statment.
 
 3. share file (0%)　　
 
