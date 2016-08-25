@@ -1,21 +1,8 @@
-// var React = require('react');
-// var socketio = require('socket.io-client');
-// var base64 = require('base-64');
-// var utf8 = require('utf8');
-// var SocketStore = require('../stores/stores');
-// var clsMasonConf = require('../masonconf');
-// var oMasonConf = new clsMasonConf();
-// var path = require('path');
-
 import React from 'react';
 import socketio from 'socket.io-client';
 import base64 from 'base-64';
 import utf8 from 'utf8';
 import SocketStore from '../stores/stores';
-// let SocketStore =  new cSocketStore();
-    console.log(SocketStore);
-    let o = new SocketStore();
-    console.log(o);
 import clsMasonConf from '../masonconf';
 let oMasonConf = new clsMasonConf();
 import path from 'path';
@@ -39,18 +26,19 @@ export default class Sockets extends React.Component {
 
 
   iniSocketCon(iniDatas) {
+
     if(oMasonConf.isDev == true){
+      console.log('===iniSocketCon===');
+      console.log(iniDatas.ip);
+
       this.socket && this.socket.disconnect();                              //disconnect socket if it has connection
       this.socket = socketio.connect('http://' + iniDatas.ip + ':8080/');   //change to parameters (IP:PORT)
       this._userName = iniDatas.username;
 
       this.socket.on('c_file', function(data){
         console.log('======in c_file======');
-        // console.log(data);
-        // console.log(this._socketData);
         this._socketData.push(data);
-        // console.log(this._socketData);
-         this.setState(JSON.parse(data));
+        this.setState(JSON.parse(data));
       }.bind(this));
 
     }else{
@@ -91,15 +79,10 @@ export default class Sockets extends React.Component {
 
   emptyFn(){}
 
-  // getInitialState: function(){
-  //   return {
-  //     getSocketState: ''
-  //   }
-  // },
 
   componentDidMount(){
-    SocketStore.addChangeListener(this.onChange);
-    SocketStore.addSendListener(this.onSend);
+    SocketStore.prototype.addChangeListener(this.onChange);
+    SocketStore.prototype.addSendListener(this.onSend);
   }
 
   componentWillUnmount(){
@@ -108,7 +91,6 @@ export default class Sockets extends React.Component {
   }
 
   render() {
-    // console.log(this._socketData);
     let images = this._socketData.map(function(content, index) {
       let file = JSON.parse(content).file;
       let user = JSON.parse(content).username;
@@ -171,14 +153,4 @@ export default class Sockets extends React.Component {
 
   }
 
-
-
-
 };
-
-// var divStyle = {
-//   width: '500px',
-//   height: '500px'
-// };
-
-// module.exports = Sockets;

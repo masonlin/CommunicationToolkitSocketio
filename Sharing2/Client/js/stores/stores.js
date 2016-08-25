@@ -1,13 +1,7 @@
-// var AppDispatcher = require('../dispatcher/app-dispatcher');
-// var EventEmitter = require('events').EventEmitter;
-// var assign = require('object-assign');
-import cAppDispatcher from '../dispatcher/app-dispatcher';
-let AppDispatcher = new cAppDispatcher();
-// console.log(AppDispatcher);
+import AppDispatcher from '../dispatcher/app-dispatcher';
 import {EventEmitter} from 'events';
 import assign from 'object-assign';
 
-// let Stores = assign({}, EventEmitter.prototype, class {
 class Stores extends EventEmitter {
   constructor(){
     super();
@@ -37,7 +31,6 @@ class Stores extends EventEmitter {
     this.removeListener('change', callback);
   }
 
-  // _data: '',
 
   emitSend(data) {
     this._data = data;
@@ -50,28 +43,26 @@ class Stores extends EventEmitter {
     this.removeListener('send', callback);
   }
 
-
-// });
 }
 
 AppDispatcher.register(function(action) {
+  let oStores = new Stores();
 
   switch(action.actionType) {
 
     case "CREATE_SOCKET":
-      // Stores.emitChange();
-      Stores.emitChange(action);
+      console.log("=CREATE_SOCKET=");
+      oStores.emitChange(action);
       break;
 
     case "SEND_FILE":
-      // console.log('SEND_MSG...');
-      Stores.emitSend(action.data);
+      console.log("=SEND_FILE=");
+      oStores.emitSend(action.data);
       break;
 
     default:
   }
 });
 
-// module.exports = Stores;
 
 export default Stores;

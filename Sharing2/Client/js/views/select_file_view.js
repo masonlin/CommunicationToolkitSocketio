@@ -1,10 +1,3 @@
-// var React = require('react');
-// var socketio = require('socket.io-client');
-// var SocketStore = require('../stores/stores');
-// var clsMasonConf = require('../masonconf');
-// var oMasonConf = new clsMasonConf();
-// var SocketActionCreators =  require('../actions/socket-action-creators');
-
 import React from 'react';
 import socketio from 'socket.io-client';
 import SocketStore from '../stores/stores';
@@ -24,7 +17,6 @@ export default class File_context extends React.Component {
 
   handleJoinClick(e) {
     let IniData = {
-      // usernameNode: this.refs.ini_data_username.getDOMNode().value,
       usernameNode: this.refs.ini_data_username.value,
       ipNode: this.refs.ini_data_ip.value
     };
@@ -32,18 +24,11 @@ export default class File_context extends React.Component {
   }
 
   handleChange(e) {
-    // var fileNode = this.refs.select_file.getDOMNode();
     let fileNode = this.refs.select_file;
     // var file = e.target.files[0];
     let file = fileNode.files[0];
     SocketActionCreators.sendFile(file);
   }
-
-
-  // getInitialState(){
-  //   return {input_file: ''};
-  // }
-
 
   render(){
 
@@ -94,7 +79,6 @@ export default class File_context extends React.Component {
           </div>
         );
     }
-
 
 
   }

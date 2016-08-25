@@ -46,8 +46,6 @@
 
 	'use strict';
 
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -70,135 +68,42 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	// var IniData = React.createClass({
-	//   render: function() {
+	// class IniData extends React.Component {
+	//
+	//   render() {
 	//     return (
 	//      <div>
 	//         <IniView data_spec="INI_DATA"/>
 	//      </div>
 	//     );
 	//   }
-	// });
-	//
-	// React.render(<IniData />, document.getElementById('ini_data'));
+	// }
 
-	// console.log(React);
-	// console.log(React.Component);
-	var IniData = function (_React$Component) {
-	  _inherits(IniData, _React$Component);
+	_reactDom2.default.render(_react2.default.createElement(_select_file_view2.default, { data_spec: 'INI_DATA' }), document.getElementById('ini_data'));
 
-	  function IniData() {
-	    _classCallCheck(this, IniData);
-
-	    return _possibleConstructorReturn(this, (IniData.__proto__ || Object.getPrototypeOf(IniData)).apply(this, arguments));
-	  }
-
-	  _createClass(IniData, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(_select_file_view2.default, { data_spec: 'INI_DATA' })
-	      );
-	    }
-	  }]);
-
-	  return IniData;
-	}(_react2.default.Component);
-
-	// let oIniData = new IniData();
-
-	_reactDom2.default.render(_react2.default.createElement(IniData, null), document.getElementById('ini_data'));
-
-	// export default IniData;
-
-
-	// var Images = React.createClass({
-	//   render: function() {
-	//     // var ar = React.Children.map(SocketData, function(child){
-	//     //   console.log('child::');
-	//     //   console.log(child.props);
-	//     // })
-	//
+	// class Images extends React.Component {
+	//   render() {
 	//     return (
 	//      <div>
 	//         <SocketData />
 	//      </div>
 	//     );
 	//   }
-	// });
-	//
-	// // React.render(<Images />, document.getElementById('images'));
-	// React.render(<SocketData />, document.getElementById('images'));
-
-	var Images = function (_React$Component2) {
-	  _inherits(Images, _React$Component2);
-
-	  function Images() {
-	    _classCallCheck(this, Images);
-
-	    return _possibleConstructorReturn(this, (Images.__proto__ || Object.getPrototypeOf(Images)).apply(this, arguments));
-	  }
-
-	  _createClass(Images, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(_sockets2.default, null)
-	      );
-	    }
-	  }]);
-
-	  return Images;
-	}(_react2.default.Component);
+	// }
 
 	_reactDom2.default.render(_react2.default.createElement(_sockets2.default, null), document.getElementById('images'));
 
-	// var InitialView = React.createClass({
-	//   render: function() {
+	// class InitialView extends React.Component{
+	//   render() {
 	//     return (
 	//       <div>
 	//         <IniView />
 	//       </div>
 	//     )
 	//   }
-	// });
-	//
-	// React.render(<InitialView />, document.getElementById('iniview'));
+	// }
 
-	var InitialView = function (_React$Component3) {
-	  _inherits(InitialView, _React$Component3);
-
-	  function InitialView() {
-	    _classCallCheck(this, InitialView);
-
-	    return _possibleConstructorReturn(this, (InitialView.__proto__ || Object.getPrototypeOf(InitialView)).apply(this, arguments));
-	  }
-
-	  _createClass(InitialView, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(_select_file_view2.default, null)
-	      );
-	    }
-	  }]);
-
-	  return InitialView;
-	}(_react2.default.Component);
-
-	_reactDom2.default.render(_react2.default.createElement(InitialView, null), document.getElementById('iniview'));
+	_reactDom2.default.render(_react2.default.createElement(_select_file_view2.default, null), document.getElementById('iniview'));
 
 /***/ },
 /* 1 */
@@ -21561,39 +21466,16 @@
 	  value: true
 	});
 
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); // import AppSocketDispatcher from '../dispatcher/app-dispatcher';
+
 
 	var _appDispatcher = __webpack_require__(173);
 
-	var _appDispatcher2 = _interopRequireDefault(_appDispatcher);
+	var AppSocketDispatcher = _interopRequireWildcard(_appDispatcher);
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	// module.exports = {
-	//
-	//   createSocket: function(iniData){
-	//     console.log('Active here');
-	//     // console.log(iniData);
-	//     var action = {
-	//       actionType: "CREATE_SOCKET",
-	//       username: iniData.usernameNode,
-	//       ip: iniData.ipNode
-	//     };
-	//
-	//     AppSocketDispatcher.dispatch(action);
-	//   },
-	//
-	//   sendFile: function(file){
-	//     console.log('SEND_FILE');
-	//     var action = {
-	//       actionType: "SEND_FILE",
-	//       data: file
-	//     };
-	//     AppSocketDispatcher.dispatch(action);
-	//   }
-	// };
 
 	var Actions = function () {
 	  function Actions() {
@@ -21602,12 +21484,6 @@
 
 	  _createClass(Actions, [{
 	    key: 'createSocket',
-
-	    // constructor(){
-	    //   this.createSocket = this.createSocket.bind(this);
-	    //   this.sendFile = this.sendFile.bind(this);
-	    // }
-
 	    value: function createSocket(iniData) {
 	      console.log('Active here');
 	      var action = {
@@ -21615,7 +21491,8 @@
 	        username: iniData.usernameNode,
 	        ip: iniData.ipNode
 	      };
-	      _appDispatcher2.default.dispatch(action);
+	      console.log(AppSocketDispatcher);
+	      AppSocketDispatcher.default.dispatch(action);
 	    }
 	  }, {
 	    key: 'sendFile',
@@ -21625,7 +21502,7 @@
 	        actionType: "SEND_FILE",
 	        data: file
 	      };
-	      _appDispatcher2.default.dispatch(action);
+	      AppSocketDispatcher.default.dispatch(action);
 	    }
 	  }]);
 
@@ -21646,7 +21523,7 @@
 
 	var _flux = __webpack_require__(174);
 
-	exports.default = _flux.Dispatcher; // var Dispatcher = require('flux').Dispatcher;
+	exports.default = new _flux.Dispatcher(); // var Dispatcher = require('flux').Dispatcher;
 
 /***/ },
 /* 174 */
@@ -22002,19 +21879,7 @@
 
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // var React = require('react');
-	// var socketio = require('socket.io-client');
-	// var base64 = require('base-64');
-	// var utf8 = require('utf8');
-	// var SocketStore = require('../stores/stores');
-	// var clsMasonConf = require('../masonconf');
-	// var oMasonConf = new clsMasonConf();
-	// var path = require('path');
-
-	// let SocketStore =  new cSocketStore();
-	console.log(_stores2.default);
-	var o = new _stores2.default();
-	console.log(o);
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var oMasonConf = new _masonconf2.default();
 
@@ -22041,17 +21906,18 @@
 	  _createClass(Sockets, [{
 	    key: 'iniSocketCon',
 	    value: function iniSocketCon(iniDatas) {
+
 	      if (oMasonConf.isDev == true) {
+	        console.log('===iniSocketCon===');
+	        console.log(iniDatas.ip);
+
 	        this.socket && this.socket.disconnect(); //disconnect socket if it has connection
 	        this.socket = _socket2.default.connect('http://' + iniDatas.ip + ':8080/'); //change to parameters (IP:PORT)
 	        this._userName = iniDatas.username;
 
 	        this.socket.on('c_file', function (data) {
 	          console.log('======in c_file======');
-	          // console.log(data);
-	          // console.log(this._socketData);
 	          this._socketData.push(data);
-	          // console.log(this._socketData);
 	          this.setState(JSON.parse(data));
 	        }.bind(this));
 	      } else {
@@ -22093,18 +21959,11 @@
 	  }, {
 	    key: 'emptyFn',
 	    value: function emptyFn() {}
-
-	    // getInitialState: function(){
-	    //   return {
-	    //     getSocketState: ''
-	    //   }
-	    // },
-
 	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      _stores2.default.addChangeListener(this.onChange);
-	      _stores2.default.addSendListener(this.onSend);
+	      _stores2.default.prototype.addChangeListener(this.onChange);
+	      _stores2.default.prototype.addSendListener(this.onSend);
 	    }
 	  }, {
 	    key: 'componentWillUnmount',
@@ -22115,7 +21974,6 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      // console.log(this._socketData);
 	      var images = this._socketData.map(function (content, index) {
 	        var file = JSON.parse(content).file;
 	        var user = JSON.parse(content).username;
@@ -22185,13 +22043,6 @@
 
 	exports.default = Sockets;
 	;
-
-	// var divStyle = {
-	//   width: '500px',
-	//   height: '500px'
-	// };
-
-	// module.exports = Sockets;
 
 /***/ },
 /* 178 */
@@ -29986,15 +29837,8 @@
 
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // var AppDispatcher = require('../dispatcher/app-dispatcher');
-	// var EventEmitter = require('events').EventEmitter;
-	// var assign = require('object-assign');
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-
-	var AppDispatcher = new _appDispatcher2.default();
-	// console.log(AppDispatcher);
-
-	// let Stores = assign({}, EventEmitter.prototype, class {
 	var Stores = function (_EventEmitter) {
 	  _inherits(Stores, _EventEmitter);
 
@@ -30034,9 +29878,6 @@
 	    value: function removeChangeListener(callback) {
 	      this.removeListener('change', callback);
 	    }
-
-	    // _data: '',
-
 	  }, {
 	    key: 'emitSend',
 	    value: function emitSend(data) {
@@ -30053,33 +29894,29 @@
 	    value: function removeSendListener(callback) {
 	      this.removeListener('send', callback);
 	    }
-
-	    // });
-
 	  }]);
 
 	  return Stores;
 	}(_events.EventEmitter);
 
-	AppDispatcher.register(function (action) {
+	_appDispatcher2.default.register(function (action) {
+	  var oStores = new Stores();
 
 	  switch (action.actionType) {
 
 	    case "CREATE_SOCKET":
-	      // Stores.emitChange();
-	      Stores.emitChange(action);
+	      console.log("=CREATE_SOCKET=");
+	      oStores.emitChange(action);
 	      break;
 
 	    case "SEND_FILE":
-	      // console.log('SEND_MSG...');
-	      Stores.emitSend(action.data);
+	      console.log("=SEND_FILE=");
+	      oStores.emitSend(action.data);
 	      break;
 
 	    default:
 	  }
 	});
-
-	// module.exports = Stores;
 
 	exports.default = Stores;
 
@@ -30730,12 +30567,7 @@
 
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // var React = require('react');
-	// var socketio = require('socket.io-client');
-	// var SocketStore = require('../stores/stores');
-	// var clsMasonConf = require('../masonconf');
-	// var oMasonConf = new clsMasonConf();
-	// var SocketActionCreators =  require('../actions/socket-action-creators');
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var oMasonConf = new _masonconf2.default();
 
@@ -30760,7 +30592,6 @@
 	    key: 'handleJoinClick',
 	    value: function handleJoinClick(e) {
 	      var IniData = {
-	        // usernameNode: this.refs.ini_data_username.getDOMNode().value,
 	        usernameNode: this.refs.ini_data_username.value,
 	        ipNode: this.refs.ini_data_ip.value
 	      };
@@ -30769,18 +30600,11 @@
 	  }, {
 	    key: 'handleChange',
 	    value: function handleChange(e) {
-	      // var fileNode = this.refs.select_file.getDOMNode();
 	      var fileNode = this.refs.select_file;
 	      // var file = e.target.files[0];
 	      var file = fileNode.files[0];
 	      SocketActionCreators.sendFile(file);
 	    }
-
-	    // getInitialState(){
-	    //   return {input_file: ''};
-	    // }
-
-
 	  }, {
 	    key: 'render',
 	    value: function render() {
