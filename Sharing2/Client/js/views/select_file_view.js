@@ -1,43 +1,51 @@
-var React = require('react');
-var socketio = require('socket.io-client');
-var SocketStore = require('../stores/stores');
-var clsMasonConf = require('../masonconf');
-var oMasonConf = new clsMasonConf();
-var SocketActionCreators =  require('../actions/socket-action-creators');
+// var React = require('react');
+// var socketio = require('socket.io-client');
+// var SocketStore = require('../stores/stores');
+// var clsMasonConf = require('../masonconf');
+// var oMasonConf = new clsMasonConf();
+// var SocketActionCreators =  require('../actions/socket-action-creators');
 
+import React from 'react';
+import socketio from 'socket.io-client';
+import SocketStore from '../stores/stores';
+import clsMasonConf from '../masonconf';
+let oMasonConf = new clsMasonConf();
+import cSocketActionCreators from '../actions/socket-action-creators';
+let SocketActionCreators = new cSocketActionCreators();
 
-var File_context = React.createClass({
-  // handleClick: function(e){
-  //   var msgNode = this.refs.input_text.getDOMNode();
-  //   SocketActionCreators.sendMsg(msgNode.value);
-  //   msgNode.value='';  //clean input box
-  //   msgNode.focus();
-  // },
-  //
-  handleJoinClick: function(e){
-    var IniData = {
-      usernameNode: this.refs.ini_data_username.getDOMNode().value,
-      ipNode: this.refs.ini_data_ip.getDOMNode().value
+export default class File_context extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {input_file: "",};
+    this.handleJoinClick = this.handleJoinClick.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.render = this.render.bind(this);
+  }
+
+  handleJoinClick(e) {
+    let IniData = {
+      // usernameNode: this.refs.ini_data_username.getDOMNode().value,
+      usernameNode: this.refs.ini_data_username.value,
+      ipNode: this.refs.ini_data_ip.value
     };
     SocketActionCreators.createSocket(IniData);
-  },
+  }
 
-  handleChange: function(e) {
-    var fileNode = this.refs.select_file.getDOMNode();
+  handleChange(e) {
+    // var fileNode = this.refs.select_file.getDOMNode();
+    let fileNode = this.refs.select_file;
     // var file = e.target.files[0];
-    var file = fileNode.files[0];
+    let file = fileNode.files[0];
     SocketActionCreators.sendFile(file);
-  },
+  }
 
 
-  getInitialState: function(){
-    return {input_file: ''};
-  },
+  // getInitialState(){
+  //   return {input_file: ''};
+  // }
 
 
-  render: function(){
-
-
+  render(){
 
     switch(this.props.data_spec) {
       case "INI_DATA":
@@ -75,30 +83,6 @@ var File_context = React.createClass({
         );
         break;
 
-      // case "INPUT_MSG":
-      //   return (
-      //     <div>
-      //       <div className="col-sm-100">
-      //         <input ref='input_text'
-      //                type='text'
-      //                name='msg_context'
-      //               //  style={divStyle}
-      //                onKeyDown={(e) => {
-      //                  if (e.keyCode == 13) {
-      //                      console.log(e.keyCode);
-      //                      this.handleClick();
-      //                      console.log(e.keyCode);
-      //                  }
-      //                }}
-      //                className='form-control'
-      //         />
-      //       </div>
-      //       <br/>
-      //       <div className="col-sm-100">
-      //         <input type='button' value='SEND' onClick={this.handleClick} className="btn btn-default"/>
-      //       </div>
-      //     </div>
-      //   );
 
       default:
         return (
@@ -114,10 +98,4 @@ var File_context = React.createClass({
 
 
   }
-});
-
-// var divStyle = {
-//   width: '500px'
-// };
-
-module.exports = File_context;
+};

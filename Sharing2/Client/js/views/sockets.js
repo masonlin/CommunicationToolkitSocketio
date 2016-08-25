@@ -1,18 +1,44 @@
-var React = require('react');
-var socketio = require('socket.io-client');
-var base64 = require('base-64');
-var utf8 = require('utf8');
-var SocketStore = require('../stores/stores');
-var clsMasonConf = require('../masonconf');
-var oMasonConf = new clsMasonConf();
-var path = require('path');
+// var React = require('react');
+// var socketio = require('socket.io-client');
+// var base64 = require('base-64');
+// var utf8 = require('utf8');
+// var SocketStore = require('../stores/stores');
+// var clsMasonConf = require('../masonconf');
+// var oMasonConf = new clsMasonConf();
+// var path = require('path');
 
-var Sockets = React.createClass({
-  _socketData: [],
-  socket: null,
-  _userName: '',
+import React from 'react';
+import socketio from 'socket.io-client';
+import base64 from 'base-64';
+import utf8 from 'utf8';
+import SocketStore from '../stores/stores';
+// let SocketStore =  new cSocketStore();
+    console.log(SocketStore);
+    let o = new SocketStore();
+    console.log(o);
+import clsMasonConf from '../masonconf';
+let oMasonConf = new clsMasonConf();
+import path from 'path';
 
-  iniSocketCon: function(iniDatas) {
+export default class Sockets extends React.Component {
+  constructor(props){
+    super(props);
+    this._socketData = [],
+    this.socket = null,
+    this._userName = '',
+    this.State = {getSocketState: ''};
+    this.iniSocketCon = this.iniSocketCon.bind(this);
+    this.onChange = this.onChange.bind(this);
+    this.sendSocketData = this.sendSocketData.bind(this);
+    this.onSend = this.onSend.bind(this);
+    this.emptyFn = this.emptyFn.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
+    this.componentWillUnmount = this.componentWillUnmount.bind(this);
+    this.render = this.render.bind(this);
+  }
+
+
+  iniSocketCon(iniDatas) {
     if(oMasonConf.isDev == true){
       this.socket && this.socket.disconnect();                              //disconnect socket if it has connection
       this.socket = socketio.connect('http://' + iniDatas.ip + ':8080/');   //change to parameters (IP:PORT)
@@ -33,20 +59,20 @@ var Sockets = React.createClass({
     }
 
 
-  },
-  onChange: function(iniDatas) {
+  }
+  onChange(iniDatas) {
     this.iniSocketCon(iniDatas);
-  },
+  }
 
 
-  sendSocketData: function(inputFile) {
+  sendSocketData(inputFile) {
     console.log('======in sendSocketData======');
     // console.log(inputFile);
 
-    var FR= new FileReader();
+    let FR= new FileReader();
 
-    var fileData;
-    var reader = new FileReader();
+    let fileData;
+    let reader = new FileReader();
     FR.onloadend = function() {
       fileData = FR.result;
       console.log('================load and emit file=======================');
@@ -57,36 +83,36 @@ var Sockets = React.createClass({
     }.bind(this);
     // console.log(FR.readAsDataURL(inputFile));
     FR.readAsDataURL(inputFile)
-  },
-  onSend: function(inputData) {
+  }
+  onSend(inputData) {
     this.sendSocketData(inputData);
-  },
+  }
 
 
-  emptyFn: function(){},
+  emptyFn(){}
 
-  getInitialState: function(){
-    return {
-      getSocketState: ''
-    }
-  },
+  // getInitialState: function(){
+  //   return {
+  //     getSocketState: ''
+  //   }
+  // },
 
-  componentDidMount: function(){
+  componentDidMount(){
     SocketStore.addChangeListener(this.onChange);
     SocketStore.addSendListener(this.onSend);
-  },
+  }
 
-  componentWillUnmount: function(){
+  componentWillUnmount(){
     SocketStore.removeChangeListener(this.onChange);
     SocketStore.removeSendListener(this.onSend);
-  },
+  }
 
-  render: function() {
+  render() {
     // console.log(this._socketData);
-    var images = this._socketData.map(function(content, index) {
-      var file = JSON.parse(content).file;
-      var user = JSON.parse(content).username;
-      var idx = user + '-' + (new Date()).toString() + '-' + index;
+    let images = this._socketData.map(function(content, index) {
+      let file = JSON.parse(content).file;
+      let user = JSON.parse(content).username;
+      let idx = user + '-' + (new Date()).toString() + '-' + index;
 
       // return (
       //   <div>
@@ -148,11 +174,11 @@ var Sockets = React.createClass({
 
 
 
-});
+};
 
 // var divStyle = {
 //   width: '500px',
 //   height: '500px'
 // };
 
-module.exports = Sockets;
+// module.exports = Sockets;

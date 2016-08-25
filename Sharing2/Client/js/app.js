@@ -1,52 +1,93 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var SocketActionCreators =  require('./actions/socket-action-creators');
-var SocketData = require('./views/sockets');
-var IniView = require('./views/select_file_view');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import SocketActionCreators from './actions/socket-action-creators';
+import SocketData from './views/sockets';
+import IniView from './views/select_file_view';
 
 
-var IniData = React.createClass({
-  render: function() {
+// var IniData = React.createClass({
+//   render: function() {
+//     return (
+//      <div>
+//         <IniView data_spec="INI_DATA"/>
+//      </div>
+//     );
+//   }
+// });
+//
+// React.render(<IniData />, document.getElementById('ini_data'));
+
+// console.log(React);
+// console.log(React.Component);
+class IniData extends React.Component {
+
+  render() {
     return (
      <div>
         <IniView data_spec="INI_DATA"/>
      </div>
     );
   }
-});
+}
 
-React.render(<IniData />, document.getElementById('ini_data'));
+// let oIniData = new IniData();
+
+ReactDOM.render(<IniData />, document.getElementById('ini_data'));
+
+// export default IniData;
 
 
+// var Images = React.createClass({
+//   render: function() {
+//     // var ar = React.Children.map(SocketData, function(child){
+//     //   console.log('child::');
+//     //   console.log(child.props);
+//     // })
+//
+//     return (
+//      <div>
+//         <SocketData />
+//      </div>
+//     );
+//   }
+// });
+//
+// // React.render(<Images />, document.getElementById('images'));
+// React.render(<SocketData />, document.getElementById('images'));
 
-
-var Images = React.createClass({
-  render: function() {
-    // var ar = React.Children.map(SocketData, function(child){
-    //   console.log('child::');
-    //   console.log(child.props);
-    // })
-
+class Images extends React.Component {
+  render() {
     return (
      <div>
         <SocketData />
      </div>
     );
   }
-});
+}
 
-// React.render(<Images />, document.getElementById('images'));
-React.render(<SocketData />, document.getElementById('images'));
+ReactDOM.render(<SocketData />, document.getElementById('images'));
 
 
-var InitialView = React.createClass({
-  render: function() {
+// var InitialView = React.createClass({
+//   render: function() {
+//     return (
+//       <div>
+//         <IniView />
+//       </div>
+//     )
+//   }
+// });
+//
+// React.render(<InitialView />, document.getElementById('iniview'));
+
+class InitialView extends React.Component{
+  render() {
     return (
       <div>
         <IniView />
       </div>
     )
   }
-});
+}
 
-React.render(<InitialView />, document.getElementById('iniview'));
+ReactDOM.render(<InitialView />, document.getElementById('iniview'));
