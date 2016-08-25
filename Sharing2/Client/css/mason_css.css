@@ -1,0 +1,92 @@
+td.hismsg {
+  height:500px;
+  width:500px;
+  vertical-align: bottom;
+}
+
+label.tt,a.tt, p.tt,h2.tt {
+  color:white;
+}
+
+#id_footer {
+    /* 設定footer的高度 */
+    height: 1px;
+    box-sizing: border-box;
+    /* 設定footer絕對位置在底部 */
+    position: absolute;
+    bottom: 1;
+    /* 展開footer寬度 */
+    width: 100%;
+}
+
+span.faa {
+  /*動畫*/
+  animation-duration: 1s;
+  animation-name: slidein;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+
+  /*轉角度*/
+  -moz-transform:rotate(6deg);
+  -webkit-transform:rotate(6deg);
+  -o-transform:rotate(6deg);
+  -ms-transform:rotate(6deg);
+  transform:rotate(6deg);
+}
+
+span.fab {
+  /*動畫*/
+  animation-duration: 1s;
+  animation-name: slidein;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+
+  /*轉角度*/
+  -moz-transform:rotate(-8deg);
+  -webkit-transform:rotate(-8deg);
+  -o-transform:rotate(-8deg);
+  -ms-transform:rotate(-8deg);
+  transform:rotate(-8deg);
+
+  /*字*/
+  color:white;
+}
+
+span.fac {
+  /*動畫*/
+  animation-duration: 1s;
+  animation-name: slideinc;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+
+  /*轉角度*/
+  -moz-transform:rotate(-8deg);
+  -webkit-transform:rotate(-8deg);
+  -o-transform:rotate(-8deg);
+  -ms-transform:rotate(-8deg);
+  transform:rotate(-8deg);
+}
+
+@keyframes slidein {
+  from {
+    padding-left: 45%;
+    width: 100%;
+  }
+
+  to {
+    padding-left: 55%;
+    width: 100%;
+  }
+}
+
+@keyframes slideinc {
+  from {
+    padding-left: 30%;
+    width: 100%;
+  }
+
+  to {
+    padding-left: 40%;
+    width: 100%;
+  }
+}
