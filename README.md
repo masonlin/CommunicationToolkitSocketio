@@ -14,7 +14,8 @@ Use **Node/Socket.io/React/Flux/BootStrap** to implement a suit communication to
 3. Refactoring Sharing - Sharing2 (30%)  
    *   Refactoring for the gallery features, change codes from ES5 to ES6 (10%)  
    *   Add react-image-gallery.js  
-   *   Use babel-cli to replace the ES6 statment.
+   *   In server side, Use babel-cli to replace the ES6 statment.
+   *   In client side, Webpack include the babel-loader
 
 3. share file (0%)　　
 
