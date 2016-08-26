@@ -7,13 +7,28 @@ import clsMasonConf from '../masonconf';
 let oMasonConf = new clsMasonConf();
 import path from 'path';
 
+import ImageGallery from 'react-image-gallery';
+
 export default class Sockets extends React.Component {
   constructor(props){
     super(props);
-    this._socketData = [],
-    this.socket = null,
-    this._userName = '',
-    this.State = {getSocketState: ''};
+    this._socketData = [];
+    this.socket = null;
+    this._userName = '';
+    // this.State = {getSocketState: ''};
+    this.state = {
+      getSocketState: '',
+      isPlaying: false,
+      showIndex: false,
+      slideOnThumbnailHover: false,
+      showBullets: true,
+      infinite: true,
+      showThumbnails: true,
+      showNav: true,
+      slideInterval: 2000,
+      fullscreen: false,
+    };
+
     this.iniSocketCon = this.iniSocketCon.bind(this);
     this.onChange = this.onChange.bind(this);
     this.sendSocketData = this.sendSocketData.bind(this);
@@ -23,6 +38,20 @@ export default class Sockets extends React.Component {
     this.componentWillUnmount = this.componentWillUnmount.bind(this);
     this.render = this.render.bind(this);
   }
+
+
+  handleImageLoad(event) {
+    console.log('Image loaded ', event.target)
+  }
+
+  handlePlay() {
+    this._imageGallery.play()
+  }
+
+  handlePause() {
+    this._imageGallery.pause()
+  }
+
 
 
   iniSocketCon(iniDatas) {
@@ -97,59 +126,58 @@ export default class Sockets extends React.Component {
       let idx = user + '-' + (new Date()).toString() + '-' + index;
 
       // return (
-      //   <div>
-      //     <img src={file} key={idx} className="img-thumbnail" alt="Cinque Terre" width="304" height="236"/> {user}
+      //   <div className="col-md-4">
+      //     <h2>From {user} :</h2>
+      //     <img src={file} key={idx} className='img-thumbnail' width='500' height='500'></img>
       //   </div>
       // );
 
+      //  console.log({original: {file}, thumbnail: {file}});
       return (
-        <div className="col-md-4">
-          <h2>From {user} :</h2>
-          <img src={file} key={idx} className='img-thumbnail' width='500' height='500'></img>
-        </div>
+        {
+          original: `${file}`,
+          thumbnail: `${file}`,
+          // originalClass: 'featured-slide',
+          // thumbnailClass: 'featured-thumb',
+        }
       );
 
     });
 
 
 
+    // return (
+    //   <div className="row">
+    //       {images}
+    //   </div>
+    // );
+
+    // console.log('=====================');
+    // console.log(images);
+    // console.log(...images);
     return (
-      <div className="row">
-          {images}
+      <div>
+        <ImageGallery
+          ref={i => this._imageGallery = i}
+          items={images}
+          slideInterval={2000}
+          onImageLoad={this.handleImageLoad}
+
+          // onSlide={this._onSlide}
+          // onPause={this._onPause.bind(this)}
+          // onPlay={this._onPlay.bind(this)}
+          infinite={this.state.infinite}
+          showBullets={this.state.showBullets}
+          showThumbnails={this.state.showThumbnails}
+          showIndex={this.state.showIndex}
+          showNav={this.state.showNav}
+          slideInterval={parseInt(this.state.slideInterval)}
+          autoPlay={this.state.isPlaying}
+          slideOnThumbnailHover={this.state.slideOnThumbnailHover}
+          />
       </div>
     );
 
-
-    // return (
-    //   <div className="carousel-inner">
-    //     {images}
-    //   </div>
-    // );
-
-    // console.log(images);
-    // return (
-    //   <div id="myCarousel" className="carousel slide" data-ride="carousel">
-    //
-    //     <ol className="carousel-indicators">
-    //       <li data-target="#myCarousel" data-slide-to="0" className="active"></li>
-    //       <li data-target="#myCarousel" data-slide-to="1"></li>
-    //       <li data-target="#myCarousel" data-slide-to="2"></li>
-    //       <li data-target="#myCarousel" data-slide-to="3"></li>
-    //     </ol>
-    //
-    //
-    //     <div className="carousel-inner">
-    //       {images}
-    //     </div>
-    //
-    //     <a className="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-    //       <span className="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-    //     </a>
-    //     <a className="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-    //       <span className="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-    //     </a>
-    //   </div>
-    // );
 
   }
 
