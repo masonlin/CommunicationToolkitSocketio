@@ -9,7 +9,7 @@ export default class Actions{
       username: iniData.usernameNode,
       ip: iniData.ipNode
     };
-    console.log(AppSocketDispatcher);
+    // console.log(AppSocketDispatcher);
     AppSocketDispatcher.default.dispatch(action);
   }
 

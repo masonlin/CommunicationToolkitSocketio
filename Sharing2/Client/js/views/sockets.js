@@ -41,7 +41,7 @@ export default class Sockets extends React.Component {
 
 
   handleImageLoad(event) {
-    console.log('Image loaded ', event.target)
+    // console.log('Image loaded ', event.target)
   }
 
   handlePlay() {
@@ -58,7 +58,7 @@ export default class Sockets extends React.Component {
 
     if(oMasonConf.isDev == true){
       console.log('===iniSocketCon===');
-      console.log(iniDatas.ip);
+      // console.log(iniDatas.ip);
 
       this.socket && this.socket.disconnect();                              //disconnect socket if it has connection
       this.socket = socketio.connect('http://' + iniDatas.ip + ':8080/');   //change to parameters (IP:PORT)

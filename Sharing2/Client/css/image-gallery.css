@@ -4,7 +4,13 @@
   -moz-user-select: none;
   -ms-user-select: none;
   -o-user-select: none;
-  user-select: none; }
+  user-select: none;
+
+  max-width:800px;
+  height:inherit;
+  width:expression(document.body.clientWidth&gt;800?"800px""auto");/*若圖片大於600px就調整*/
+  overflow:hidden;      /*超過不顯示*/
+}
 
 .image-gallery-content {
   position: relative; }
@@ -43,7 +49,13 @@
   line-height: 0;
   overflow: hidden;
   position: relative;
-  white-space: nowrap; }
+  white-space: nowrap;
+
+  max-height:600px;
+  /*height:inherit;*/
+  height:expression(document.body.clientHeight&gt;600?"600px""auto");/*若圖片大於600px就調整*/
+  overflow:hidden;      /*超過不顯示*/
+}
 
 .image-gallery-slide {
   left: 0;

@@ -62,7 +62,7 @@
 
 	var _sockets2 = _interopRequireDefault(_sockets);
 
-	var _select_file_view = __webpack_require__(232);
+	var _select_file_view = __webpack_require__(234);
 
 	var _select_file_view2 = _interopRequireDefault(_select_file_view);
 
@@ -21491,7 +21491,7 @@
 	        username: iniData.usernameNode,
 	        ip: iniData.ipNode
 	      };
-	      console.log(AppSocketDispatcher);
+	      // console.log(AppSocketDispatcher);
 	      AppSocketDispatcher.default.dispatch(action);
 	    }
 	  }, {
@@ -21875,7 +21875,7 @@
 
 	var _path2 = _interopRequireDefault(_path);
 
-	var _reactImageGallery = __webpack_require__(233);
+	var _reactImageGallery = __webpack_require__(232);
 
 	var _reactImageGallery2 = _interopRequireDefault(_reactImageGallery);
 
@@ -21930,7 +21930,7 @@
 	  _createClass(Sockets, [{
 	    key: 'handleImageLoad',
 	    value: function handleImageLoad(event) {
-	      console.log('Image loaded ', event.target);
+	      // console.log('Image loaded ', event.target)
 	    }
 	  }, {
 	    key: 'handlePlay',
@@ -21948,7 +21948,7 @@
 
 	      if (oMasonConf.isDev == true) {
 	        console.log('===iniSocketCon===');
-	        console.log(iniDatas.ip);
+	        // console.log(iniDatas.ip);
 
 	        this.socket && this.socket.disconnect(); //disconnect socket if it has connection
 	        this.socket = _socket2.default.connect('http://' + iniDatas.ip + ':8080/'); //change to parameters (IP:PORT)
@@ -30569,149 +30569,6 @@
 	  value: true
 	});
 
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _socket = __webpack_require__(178);
-
-	var _socket2 = _interopRequireDefault(_socket);
-
-	var _stores = __webpack_require__(227);
-
-	var _stores2 = _interopRequireDefault(_stores);
-
-	var _masonconf = __webpack_require__(230);
-
-	var _masonconf2 = _interopRequireDefault(_masonconf);
-
-	var _socketActionCreators = __webpack_require__(172);
-
-	var _socketActionCreators2 = _interopRequireDefault(_socketActionCreators);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var oMasonConf = new _masonconf2.default();
-
-	var SocketActionCreators = new _socketActionCreators2.default();
-
-	var File_context = function (_React$Component) {
-	  _inherits(File_context, _React$Component);
-
-	  function File_context(props) {
-	    _classCallCheck(this, File_context);
-
-	    var _this = _possibleConstructorReturn(this, (File_context.__proto__ || Object.getPrototypeOf(File_context)).call(this, props));
-
-	    _this.state = { input_file: "" };
-	    _this.handleJoinClick = _this.handleJoinClick.bind(_this);
-	    _this.handleChange = _this.handleChange.bind(_this);
-	    _this.render = _this.render.bind(_this);
-	    return _this;
-	  }
-
-	  _createClass(File_context, [{
-	    key: 'handleJoinClick',
-	    value: function handleJoinClick(e) {
-	      var IniData = {
-	        usernameNode: this.refs.ini_data_username.value,
-	        ipNode: this.refs.ini_data_ip.value
-	      };
-	      SocketActionCreators.createSocket(IniData);
-	    }
-	  }, {
-	    key: 'handleChange',
-	    value: function handleChange(e) {
-	      var fileNode = this.refs.select_file;
-	      // var file = e.target.files[0];
-	      var file = fileNode.files[0];
-	      SocketActionCreators.sendFile(file);
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-
-	      switch (this.props.data_spec) {
-	        case "INI_DATA":
-	          return _react2.default.createElement(
-	            'div',
-	            null,
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'col-sm-3' },
-	              _react2.default.createElement('input', { ref: 'ini_data_username',
-	                type: 'text',
-	                name: 'username',
-	                className: 'form-control',
-	                placeholder: 'Type Your ID'
-	              })
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'col-sm-3' },
-	              _react2.default.createElement('input', { ref: 'ini_data_ip',
-	                type: 'text',
-	                name: 'ip',
-	                className: 'form-control',
-	                placeholder: 'Type Server IP'
-	              })
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'col-sm-3' },
-	              _react2.default.createElement(
-	                'button',
-	                { ref: 'ini_data_join',
-	                  type: 'button',
-	                  className: 'btn btn-default',
-	                  'data-toggle': 'collapse',
-	                  'data-target': '#demo',
-	                  onClick: this.handleJoinClick
-	                },
-	                'Join'
-	              )
-	            ),
-	            _react2.default.createElement('div', { className: 'col-sm-3' })
-	          );
-	          break;
-
-	        default:
-	          return _react2.default.createElement(
-	            'div',
-	            null,
-	            _react2.default.createElement('input', { ref: 'select_file',
-	              id: 'file',
-	              type: 'file',
-	              onChange: this.handleChange })
-	          );
-	      }
-	    }
-	  }]);
-
-	  return File_context;
-	}(_react2.default.Component);
-
-	exports.default = File_context;
-	;
-
-/***/ },
-/* 233 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -30720,7 +30577,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactSwipeable = __webpack_require__(234);
+	var _reactSwipeable = __webpack_require__(233);
 
 	var _reactSwipeable2 = _interopRequireDefault(_reactSwipeable);
 
@@ -31548,7 +31405,7 @@
 	};
 
 /***/ },
-/* 234 */
+/* 233 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31742,6 +31599,152 @@
 	});
 
 	module.exports = Swipeable;
+
+/***/ },
+/* 234 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _socket = __webpack_require__(178);
+
+	var _socket2 = _interopRequireDefault(_socket);
+
+	var _stores = __webpack_require__(227);
+
+	var _stores2 = _interopRequireDefault(_stores);
+
+	var _masonconf = __webpack_require__(230);
+
+	var _masonconf2 = _interopRequireDefault(_masonconf);
+
+	var _socketActionCreators = __webpack_require__(172);
+
+	var _socketActionCreators2 = _interopRequireDefault(_socketActionCreators);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var oMasonConf = new _masonconf2.default();
+
+	var SocketActionCreators = new _socketActionCreators2.default();
+
+	var File_context = function (_React$Component) {
+	  _inherits(File_context, _React$Component);
+
+	  function File_context(props) {
+	    _classCallCheck(this, File_context);
+
+	    var _this = _possibleConstructorReturn(this, (File_context.__proto__ || Object.getPrototypeOf(File_context)).call(this, props));
+
+	    _this.state = { input_file: "" };
+	    _this.handleJoinClick = _this.handleJoinClick.bind(_this);
+	    _this.handleChange = _this.handleChange.bind(_this);
+	    _this.render = _this.render.bind(_this);
+	    return _this;
+	  }
+
+	  _createClass(File_context, [{
+	    key: 'handleJoinClick',
+	    value: function handleJoinClick(e) {
+	      var IniData = {
+	        usernameNode: this.refs.ini_data_username.value,
+	        ipNode: this.refs.ini_data_ip.value
+	      };
+	      SocketActionCreators.createSocket(IniData);
+	    }
+	  }, {
+	    key: 'handleChange',
+	    value: function handleChange(e) {
+	      var fileNode = this.refs.select_file;
+	      // var file = e.target.files[0];
+	      var file = fileNode.files[0];
+	      SocketActionCreators.sendFile(file);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+
+	      switch (this.props.data_spec) {
+	        case "INI_DATA":
+	          return _react2.default.createElement(
+	            'div',
+	            null,
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'col-sm-3' },
+	              _react2.default.createElement('input', { ref: 'ini_data_username',
+	                type: 'text',
+	                name: 'username',
+	                className: 'form-control',
+	                placeholder: 'Type Your ID'
+	              })
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'col-sm-3' },
+	              _react2.default.createElement('input', { ref: 'ini_data_ip',
+	                type: 'text',
+	                name: 'ip',
+	                className: 'form-control',
+	                placeholder: 'Type Server IP'
+	              })
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'col-sm-3' },
+	              _react2.default.createElement(
+	                'button',
+	                { ref: 'ini_data_join',
+	                  type: 'button',
+	                  className: 'btn btn-default',
+	                  'data-toggle': 'collapse',
+	                  'data-target': '#demo',
+	                  onClick: this.handleJoinClick
+	                },
+	                'Join'
+	              )
+	            ),
+	            _react2.default.createElement('div', { className: 'col-sm-3' })
+	          );
+	          break;
+
+	        default:
+	          return _react2.default.createElement(
+	            'div',
+	            { className: 'col-sm-3' },
+	            _react2.default.createElement('input', { ref: 'select_file',
+	              id: 'file',
+	              type: 'file',
+	              onChange: this.handleChange
+	              //  className="btn btn-default"
+	              //  className="file"
+	            })
+	          );
+	      }
+	    }
+	  }]);
+
+	  return File_context;
+	}(_react2.default.Component);
+
+	exports.default = File_context;
+	;
 
 /***/ }
 /******/ ]);

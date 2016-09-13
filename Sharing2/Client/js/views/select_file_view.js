@@ -71,11 +71,14 @@ export default class File_context extends React.Component {
 
       default:
         return (
-          <div>
+          <div className="col-sm-3">
             <input ref="select_file"
                    id="file"
                    type="file"
-                   onChange={this.handleChange} />
+                   onChange={this.handleChange}
+                   //  className="btn btn-default"
+                   //  className="file"
+                   />
           </div>
         );
     }
