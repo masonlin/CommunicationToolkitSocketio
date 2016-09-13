@@ -1,5 +1,5 @@
 # CommunicationToolkitSocketio
-Use **Node/Socket.io/React/Flux/BootStrap** to implement a suit communication tool and use **Webpack** to create the bundle.　　
+Use **Node/Socket.io/React/Flux/BootStrap/Babel** to implement a suit communication tool and use **Webpack** to create the bundle.　　
 
 =============
 1. Messanger (100%) - realtime sharing message.  　　
