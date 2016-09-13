@@ -23,7 +23,7 @@ Use **Node/Socket.io/React/Flux/BootStrap** to implement a suit communication to
    *   In client side, Webpack include the babel-loader
    *   Refactoring to ES6 is completed.  
    
-   於 server 目錄下執行 babel-node sharing.js 啟動照片分享平台，只要登入該伺服器 IP 即可即時與好友分享圖片，前端使用Bootstrap，故行動裝置瀏覽器亦可使用。  
+   於 server 目錄下執行 babel-node sharing.js 啟動照片分享平台，只要登入該伺服器 IP 即可即時與好友分享圖片，前端使用Bootstrap，故行動裝置瀏覽器亦可使用。使用 [React Image Gallery] (https://github.com/xiaolin/react-image-gallery) 來呈現圖片 Gallery。  
    
    =============
 
