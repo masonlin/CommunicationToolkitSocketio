@@ -31,7 +31,7 @@ Use **Node/Socket.io/React/Flux/BootStrap/Babel** to implement a suit communicat
 
 3. share file (0%)　　
 
-4. vedio and audio stream (webRTC) - FaceTalk (50%)　　
+4. vedio and audio stream (webRTC) - FaceTalk (55%)　　
    *  Multi user
 
 5. meassanger bot (0%)　　
